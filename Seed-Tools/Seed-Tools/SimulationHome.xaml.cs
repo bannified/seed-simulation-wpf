@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Seed_Tools
 {
 	/// <summary>
-	/// Interaction logic for MainWindow.xaml
+	/// Interaction logic for SimulationHome.xaml
 	/// </summary>
-	public partial class MainWindow : NavigationWindow
+	public partial class SimulationHome : Page
 	{
-		public MainWindow()
+		public SimulationHome()
 		{
 			InitializeComponent();
 		}
