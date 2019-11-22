@@ -24,5 +24,11 @@ namespace Seed_Tools
 		{
 			InitializeComponent();
 		}
-	}
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SimulationHome simulationHomePage = new SimulationHome(this.presetListBox.SelectedItem);
+            this.NavigationService.Navigate(simulationHomePage);
+        }
+    }
 }

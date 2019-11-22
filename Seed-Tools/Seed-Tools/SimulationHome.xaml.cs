@@ -24,5 +24,10 @@ namespace Seed_Tools
 		{
 			InitializeComponent();
 		}
+
+        public SimulationHome(object data):this()
+        {
+            this.DataContext = data;
+        }
 	}
 }
