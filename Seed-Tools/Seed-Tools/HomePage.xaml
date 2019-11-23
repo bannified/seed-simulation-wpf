@@ -1,0 +1,58 @@
+﻿<Page x:Class="Seed_Tools.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Seed_Tools"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="HomePage">
+
+    <Page.Background>
+        <ImageBrush ImageSource="images/bg.png"/>
+    </Page.Background>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="1">
+            <Grid.Background>
+                <SolidColorBrush Color="Beige"/>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Style="{StaticResource TitleStyle}" Grid.Row="0" VerticalAlignment="Center">
+                    <Underline>Project Seed</Underline>
+                </Label>
+
+                <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button Style="{StaticResource HomeButtonStyle}" Click="Simulation_Click">
+                        Simulation Page
+                    </Button>
+                    <Button Style="{StaticResource HomeButtonStyle}" Click="DeckButton_Click">
+                        Deck Edit/Select
+                    </Button>
+                    <Button Style="{StaticResource HomeButtonStyle}" Click="RulesButton_Click">
+                        Rules Edit
+                    </Button>
+                    <Button Style="{StaticResource HomeButtonStyle}" Click="ExitButton_Click">
+                        Exit
+                    </Button>
+                </StackPanel>
+            </Grid>
+            
+        </Grid>
+    </Grid>
+</Page>

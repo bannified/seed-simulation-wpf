@@ -4,7 +4,29 @@
              xmlns:local="clr-namespace:Seed_Tools"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         <!-- Header Text Style -->
+        <!-- Title Text Style -->
+        <Style x:Key="TitleStyle" TargetType="{x:Type Label}">
+            <Setter Property="Label.HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="Label.VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Label.FontFamily" Value="Trebuchet MS"></Setter>
+            <Setter Property="Label.FontWeight" Value="ExtraBlack"></Setter>
+            <Setter Property="Label.FontSize" Value="36"></Setter>
+            <Setter Property="Label.Foreground" Value="#0066cc"></Setter>
+        </Style>
+
+        <!-- Home Button Style -->
+        <Style x:Key="HomeButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="0,15"/>
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="Auto"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontFamily" Value="Trebuchet MS"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Header Text Style -->
         <Style x:Key="headerTextStyle">
             <Setter Property="Label.VerticalAlignment" Value="Center"></Setter>
             <Setter Property="Label.FontFamily" Value="Trebuchet MS"></Setter>
