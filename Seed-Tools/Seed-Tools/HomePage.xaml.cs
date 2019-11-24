@@ -32,7 +32,8 @@ namespace Seed_Tools
 
         private void DeckButton_Click(object sender, RoutedEventArgs e)
         {
-
+            DeckEditPage deckEditPage = new DeckEditPage();
+            this.NavigationService.Navigate(deckEditPage);
         }
 
         private void RulesButton_Click(object sender, RoutedEventArgs e)
