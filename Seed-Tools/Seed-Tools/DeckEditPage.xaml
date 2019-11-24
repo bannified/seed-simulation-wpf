@@ -1,0 +1,77 @@
+﻿<Page x:Class="Seed_Tools.DeckEditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Seed_Tools"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DeckEditPage">
+
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="Bisque"/>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- All Cards List -->
+        <Grid Grid.Column="0">
+
+        </Grid>
+
+        <!-- Selected Card View List -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Main Card Control View -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Remove card from deck Control -->
+                <Grid Grid.Column="0">
+                    <local:QuantityButton ButtonText="Rem&#10;&lt;&lt;&lt;" 
+                                          Grid.Row="0"
+                                          Padding="0" 
+                                          VerticalAlignment="Center" 
+                                          Margin="0"
+                                          OnMainButtonClicked="OnRemoveCardClicked">
+                    </local:QuantityButton>
+                </Grid>
+                
+                <!-- Actual Card -->
+                <local:Card Grid.Column="1">
+                    
+                </local:Card>
+
+                <!-- Add card from deck Control -->
+                <Grid Grid.Column="2">
+                    <local:QuantityButton ButtonText="Add&#10;&gt;&gt;&gt;" 
+                                          Grid.Row="0"
+                                          Padding="0" 
+                                          VerticalAlignment="Center"
+                                          Margin="0"
+                                          OnMainButtonClicked="OnAddCardClicked">
+                    </local:QuantityButton>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!-- Selected Card View List -->
+        <Grid Grid.Column="2">
+
+        </Grid>
+    </Grid>
+</Page>

@@ -58,8 +58,14 @@
     <Compile Include="Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DeckEditPage.xaml.cs">
+      <DependentUpon>DeckEditPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="QuantityButton.xaml.cs">
+      <DependentUpon>QuantityButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="SeedToolsHome.xaml.cs">
       <DependentUpon>SeedToolsHome.xaml</DependentUpon>
@@ -70,6 +76,10 @@
     <Page Include="Card.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="DeckEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="HomePage.xaml">
       <SubType>Designer</SubType>
@@ -87,6 +97,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="QuantityButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SeedToolsHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
