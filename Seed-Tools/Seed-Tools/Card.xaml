@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="Seed_Tools.Card"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Seed_Tools"
+             mc:Ignorable="d"
+             d:DesignHeight="344" d:DesignWidth="236">
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="Cornsilk"/>
+        </Grid.Background>
+        <Image Name="MainImage" Margin="5" 
+               Source="{Binding MainImageSource, TargetNullValue='images/sample-card.png', 
+            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Card}}}">
+        </Image>
+    </Grid>
+</UserControl>

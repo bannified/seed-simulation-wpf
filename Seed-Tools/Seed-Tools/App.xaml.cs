@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.IO;
+using System.Reflection;
 
 namespace Seed_Tools
 {
@@ -13,5 +15,9 @@ namespace Seed_Tools
 	/// </summary>
 	public partial class App : Application
 	{
+        public static string GetRootPath()
+        {
+            return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        }
 	}
 }

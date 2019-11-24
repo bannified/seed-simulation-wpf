@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Card.xaml.cs">
+      <DependentUpon>Card.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -64,6 +67,10 @@
     <Compile Include="SimulationHome.xaml.cs">
       <DependentUpon>SimulationHome.xaml</DependentUpon>
     </Compile>
+    <Page Include="Card.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -118,6 +125,9 @@
   <ItemGroup>
     <Resource Include="images\bg.png" />
     <Resource Include="images\bg2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\sample-card.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
