@@ -21,7 +21,38 @@
 
         <!-- All Cards List -->
         <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
 
+            <Label Grid.Row="0" Style="{StaticResource TitleStyle}" FontSize="16">
+                <Viewbox>
+                    <TextBlock>
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="3" BlurRadius="10" Color="#FFFFFF"/>
+                        </TextBlock.Effect>
+                        <Underline>
+                        All Cards
+                        </Underline>
+                    </TextBlock>
+                </Viewbox>
+            </Label>
+
+            <ScrollViewer Name="AllCardsScrollView" Margin="10,0,0,0" Grid.Row="1" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch">
+                <ListBox Name="AllCardsListBox">
+                </ListBox>
+            </ScrollViewer>
+
+            <Button Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource HomeButtonStyle}" Margin="5" Padding="0" Height="Auto">
+                <Viewbox>
+                    <TextBlock>
+                    Add new card
+                    </TextBlock>
+                </Viewbox>
+                
+            </Button>
         </Grid>
 
         <!-- Selected Card View List -->
@@ -100,7 +131,52 @@
 
         <!-- Selected Card View List -->
         <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
 
+            <Label Grid.Row="0" Style="{StaticResource TitleStyle}" FontSize="16" Foreground="IndianRed">
+                <Viewbox>
+                    <TextBlock>
+                        <TextBlock.Effect>
+                            <DropShadowEffect ShadowDepth="3" BlurRadius="10" Color="#FFFFFF"/>
+                        </TextBlock.Effect>
+                        <Underline>
+                        Deck
+                        </Underline>
+                    </TextBlock>
+                </Viewbox>
+            </Label>
+
+            <ScrollViewer Name="DeckCardsScrollView" Margin="10,0,0,0" Grid.Row="1" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch">
+                <ListBox Name="DeckCardsListBox">
+                </ListBox>
+            </ScrollViewer>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Button Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource HomeButtonStyle}" Margin="5" Padding="0" Height="Auto">
+                    <Viewbox>
+                        <TextBlock>
+                    Create New Deck
+                        </TextBlock>
+                    </Viewbox>
+                </Button>
+                <Button Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource HomeButtonStyle}" Margin="5" Padding="0" Height="Auto">
+                    <Viewbox>
+                        <TextBlock>
+                        Change Deck
+                        </TextBlock>
+                    </Viewbox>
+                </Button>
+            </Grid>
+            
         </Grid>
     </Grid>
 </Page>
