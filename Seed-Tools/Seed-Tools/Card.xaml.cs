@@ -20,6 +20,15 @@ namespace Seed_Tools
     /// </summary>
     public partial class Card : UserControl
     {
+        public CardData cardData
+        {
+            get { return (CardData)GetValue(CardDataProperty); }
+            set { SetValue(CardDataProperty, value); }
+        }
+
+        public static readonly DependencyProperty CardDataProperty =
+            DependencyProperty.Register("cardData", typeof(CardData), typeof(Card), new PropertyMetadata(new CardData()));
+
         public static readonly DependencyProperty MainImageSourceProperty =
             DependencyProperty.Register(nameof(MainImageSource), typeof(string), typeof(Card),
                 new PropertyMetadata("images/sample-card.png", new PropertyChangedCallback(OnMainImageSourceChanged)));
@@ -33,6 +42,14 @@ namespace Seed_Tools
         public Card()
         {
             InitializeComponent();
+            cardData = new CardData();
+        }
+
+        public Card(CardData data)
+        {
+            InitializeComponent();
+            cardData = data;
+            MainImageSource = data.MainImageSourcePath;
         }
 
         private static void OnMainImageSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {

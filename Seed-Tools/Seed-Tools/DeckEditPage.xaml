@@ -32,6 +32,18 @@
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
 
+            <Grid Grid.Row="0">
+                <Label Style="{StaticResource CardNameTitleStyle}">
+                    <Viewbox HorizontalAlignment="Stretch">
+                        <TextBlock Text="{Binding cardData.Name, ElementName=card}" TextWrapping="Wrap">
+                            <TextBlock.Effect>
+                                <DropShadowEffect ShadowDepth="3" BlurRadius="10" Color="#000000"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </Viewbox>                    
+                </Label>
+            </Grid>
+
             <!-- Main Card Control View -->
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -47,13 +59,14 @@
                                           Padding="0" 
                                           VerticalAlignment="Center" 
                                           Margin="0"
-                                          OnMainButtonClicked="OnRemoveCardClicked">
+                                          OnMainButtonClicked="OnRemoveCardClicked"
+                                          CurrentQuantity="1">
                     </local:QuantityButton>
                 </Grid>
-                
+
                 <!-- Actual Card -->
-                <local:Card Grid.Column="1">
-                    
+                <local:Card x:Name="card" Grid.Column="1">
+
                 </local:Card>
 
                 <!-- Add card from deck Control -->
@@ -63,8 +76,24 @@
                                           Padding="0" 
                                           VerticalAlignment="Center"
                                           Margin="0"
-                                          OnMainButtonClicked="OnAddCardClicked">
+                                          OnMainButtonClicked="OnAddCardClicked"
+                                          CurrentQuantity="1">
                     </local:QuantityButton>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
                 </Grid>
             </Grid>
         </Grid>

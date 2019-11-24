@@ -72,5 +72,15 @@
             <Setter Property="Margin" Value="0,10,0,0"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
         </Style>
+        
+        <!-- Card Styles -->
+        <Style x:Key="CardNameTitleStyle" TargetType="{x:Type Label}">
+            <Setter Property="Label.HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="Label.VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Label.FontFamily" Value="Trebuchet MS"></Setter>
+            <Setter Property="Label.FontWeight" Value="ExtraBlack"></Setter>
+            <Setter Property="Label.FontSize" Value="24"></Setter>
+            <Setter Property="Label.Foreground" Value="#FFFFFF"></Setter>
+        </Style>
     </Application.Resources>
 </Application>

@@ -58,6 +58,7 @@
     <Compile Include="Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CardData.cs" />
     <Compile Include="DeckEditPage.xaml.cs">
       <DependentUpon>DeckEditPage.xaml</DependentUpon>
     </Compile>
