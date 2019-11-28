@@ -46,9 +46,9 @@ namespace Seed_Tools
         {
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
             dialog.InitialDirectory = App.GetRootPath();
-            dialog.DefaultExt = ".dek";
+            dialog.DefaultExt = App.Constants.FileExtensions.DECK;
             dialog.Multiselect = false;
-            dialog.Filter = "Seed Deck Files (*.dek)|*.dek";
+            dialog.Filter = string.Format("Seed Deck Files (*{0})|*{0}", App.Constants.FileExtensions.DECK);
 
             Nullable<bool> result = dialog.ShowDialog();
 
@@ -69,8 +69,8 @@ namespace Seed_Tools
         {
             Microsoft.Win32.SaveFileDialog dialog = new Microsoft.Win32.SaveFileDialog();
             dialog.InitialDirectory = App.GetRootPath();
-            dialog.DefaultExt = ".dek";
-            dialog.Filter = "Seed Deck Files (*.dek)|*.dek";
+            dialog.DefaultExt = App.Constants.FileExtensions.DECK;
+            dialog.Filter = string.Format("Seed Deck Files (*{0})|*{0}", App.Constants.FileExtensions.DECK);
 
             Nullable<bool> result = dialog.ShowDialog();
 

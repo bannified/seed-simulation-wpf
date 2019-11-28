@@ -1,7 +1,12 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Seed_Tools.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="CardLibraryPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">./CardLibrary.clb</Value>
+    </Setting>
+    <Setting Name="ActiveDeckPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">./default.dek</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>
