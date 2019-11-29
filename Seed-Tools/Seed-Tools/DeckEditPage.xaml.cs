@@ -30,6 +30,11 @@ namespace Seed_Tools
             InitializeComponent();
             ActiveDeckData = new DeckData();
             OnDeckLoaded += RefreshDeckDisplay;
+
+            if (System.IO.File.Exists(Seed_Tools.Properties.Settings.Default.ActiveDeckPath))
+            {
+                LoadDeckAtPath(Seed_Tools.Properties.Settings.Default.ActiveDeckPath);
+            }
         }
 
         private void OnRemoveCardClicked(object sender, float e)
@@ -57,12 +62,20 @@ namespace Seed_Tools
                 string filename = dialog.FileName;
                 if (System.IO.File.Exists(filename))
                 {
-                    string loadedText = System.IO.File.ReadAllText(filename);
-                    DeckData deck = JsonNet.Deserialize<DeckData>(loadedText);
-                    ActiveDeckData = deck;
-                    OnDeckLoaded?.Invoke(deck);
+                    LoadDeckAtPath(filename);
+                    // Set active deck path
+                    string relative = App.GetRelativePathFromFullPath(filename);
+                    Seed_Tools.Properties.Settings.Default.ActiveDeckPath = relative;
                 }
             }
+        }
+
+        private void LoadDeckAtPath(string path)
+        {
+            string loadedText = System.IO.File.ReadAllText(path);
+            DeckData deck = JsonNet.Deserialize<DeckData>(loadedText);
+            ActiveDeckData = deck;
+            OnDeckLoaded?.Invoke(deck);
         }
 
         private void DeckSaveAsClicked(object sender, RoutedEventArgs e)
@@ -77,6 +90,11 @@ namespace Seed_Tools
             if (result == true)
             {
                 string filename = dialog.FileName;
+
+                // Set active deck path
+                string relative = App.GetRelativePathFromFullPath(filename);
+                Seed_Tools.Properties.Settings.Default.ActiveDeckPath = relative;
+
                 System.IO.FileStream fs = System.IO.File.Create(filename);
                 fs.Close();
                 string resultJson = JsonNet.Serialize(ActiveDeckData);

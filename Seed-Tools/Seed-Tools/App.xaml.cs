@@ -41,6 +41,11 @@ namespace Seed_Tools
             return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         }
 
+        public static string GetRelativePathFromFullPath(string fullPath)
+        {
+            return fullPath.Replace(GetRootPath(), ".");
+        }
+
         void CheckLibraries()
         {
             if (!System.IO.File.Exists(Seed_Tools.Properties.Settings.Default.ActiveDeckPath))
