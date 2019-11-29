@@ -22,7 +22,7 @@ namespace Seed_Tools
     {
         public CardData card { get; set; }
 
-        public CardLibraryEntryView(CardData data) : base()
+        public CardLibraryEntryView(CardData data) : this()
         {
             card = data;
         }
