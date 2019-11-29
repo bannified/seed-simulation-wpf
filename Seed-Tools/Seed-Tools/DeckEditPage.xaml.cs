@@ -50,6 +50,11 @@ namespace Seed_Tools
             RefreshCardLibrary();
             OnNewCardAdded += RefreshCardLibrary;
 
+            if (CardViews.Count > 0)
+            {
+                CurrentCard = CardViews[0];
+            }
+
             if (System.IO.File.Exists(Seed_Tools.Properties.Settings.Default.ActiveDeckPath))
             {
                 LoadDeckAtPath(Seed_Tools.Properties.Settings.Default.ActiveDeckPath);
@@ -197,6 +202,8 @@ namespace Seed_Tools
 
             Nullable<bool> result = dialog.ShowDialog();
 
+            CardData savedCard = CurrentCard;
+
             if (result == true)
             {
                 string filepath = dialog.FileName;
@@ -215,6 +222,11 @@ namespace Seed_Tools
                     MessageBox.Show("File does not exist.");
                 }
             }
+
+            
+            CurrentCard = new CardData();
+            // Workaround to force the binding to update.
+            CurrentCard = savedCard;
         }
 
         private void AddNewCardClicked(object sender, RoutedEventArgs e)
@@ -242,12 +254,32 @@ namespace Seed_Tools
 
         private void CardSelectedFromList(object sender, SelectionChangedEventArgs e)
         {
+            if (AllCardsListBox.SelectedItem == null)
+            {
+                return;
+            }
+
             CurrentCard = AllCardsListBox.SelectedItem as CardData;
         }
 
         private void SetNameButtonClicked(object sender, RoutedEventArgs e)
         {
+            TextInputWindow inputWindow = new TextInputWindow("Change Card Title", "New Card Title");
 
+            Nullable<bool> result = inputWindow.ShowDialog();
+
+            CardData savedCard = CurrentCard;
+
+            if (result == true)
+            {
+                CurrentCard.Name = inputWindow.ResultTextBox.Text;
+            }
+
+            RefreshCardLibrary();
+
+            CurrentCard = new CardData();
+            // Workaround to force the binding to update.
+            CurrentCard = savedCard;
         }
     }
 }

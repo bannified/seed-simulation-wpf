@@ -44,7 +44,7 @@ namespace Seed_Tools
             InitializeComponent();
         }
 
-        public TextInputWindow(string windowTitle, string inputBoxTitle) : base()
+        public TextInputWindow(string windowTitle, string inputBoxTitle) : this()
         {
             this.WindowTitle = windowTitle;
             this.InputBoxTitle = inputBoxTitle;

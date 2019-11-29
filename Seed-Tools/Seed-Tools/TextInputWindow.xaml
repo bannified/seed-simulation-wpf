@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Seed_Tools"
         mc:Ignorable="d"
+        VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"
+        VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
         Title="{Binding WindowTitle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TextInputWindow}}}" Height="450" Width="800">
     <Grid>
         <Grid.Background>
