@@ -1,0 +1,67 @@
+﻿<Window x:Class="Seed_Tools.TextInputWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Seed_Tools"
+        mc:Ignorable="d"
+        Title="{Binding WindowTitle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TextInputWindow}}}" Height="450" Width="800">
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="DarkGray"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            
+            <Grid Grid.Row="1" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Viewbox Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Left">
+                    <TextBlock VerticalAlignment="Bottom" Text="{Binding InputBoxTitle, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:TextInputWindow}}}">
+                    </TextBlock>
+                </Viewbox>
+
+                <TextBox Name="ResultTextBox" Grid.Row="1" TextWrapping="Wrap">
+                </TextBox>
+
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="1" Margin="5" Click="CancelButtonClicked">
+                        <Viewbox>
+                            <Label>
+                                Cancel
+                            </Label>
+                        </Viewbox>
+                    </Button>
+                    <Button Grid.Column="2" Margin="5" Click="ConfirmButtonClicked">
+                        <Viewbox>
+                            <Label>
+                                Confirm
+                            </Label>
+                        </Viewbox>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
