@@ -16,7 +16,11 @@ namespace Seed_Tools
 	/// </summary>
 	public partial class App : Application
 	{
-        public Dictionary<int, CardData> CardLibrary;
+        public Random random = new Random();
+
+        public Dictionary<string, CardData> CardLibrary;
+
+        public static App CastedInstance { get { return Current as App; } }
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -62,10 +66,10 @@ namespace Seed_Tools
             string path = Seed_Tools.Properties.Settings.Default.CardLibraryPath;
             if (!System.IO.File.Exists(Seed_Tools.Properties.Settings.Default.CardLibraryPath))
             {
-                CardLibrary = new Dictionary<int, CardData>();
+                CardLibrary = new Dictionary<string, CardData>();
             } else
             {
-                Dictionary<int, CardData> data = JsonNet.Deserialize< Dictionary<int, CardData> >(System.IO.File.ReadAllText(path));
+                Dictionary<string, CardData> data = JsonNet.Deserialize< Dictionary<string, CardData> >(System.IO.File.ReadAllText(path));
                 CardLibrary = data;
             }
         }

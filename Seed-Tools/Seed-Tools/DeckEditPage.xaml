@@ -41,17 +41,21 @@
             </Label>
 
             <ScrollViewer Name="AllCardsScrollView" Margin="10,0,0,0" Grid.Row="1" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch">
-                <ListBox Name="AllCardsListBox">
+                <ListBox Name="AllCardsListBox" SelectionChanged="CardSelectedFromList">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <local:CardLibraryEntryView/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
                 </ListBox>
             </ScrollViewer>
 
-            <Button Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource HomeButtonStyle}" Margin="5" Padding="0" Height="Auto">
+            <Button Grid.Row="2" Click="AddNewCardClicked" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Style="{StaticResource HomeButtonStyle}" Margin="5" Padding="0" Height="Auto">
                 <Viewbox>
                     <TextBlock>
                     Add new card
                     </TextBlock>
                 </Viewbox>
-                
             </Button>
         </Grid>
 
@@ -66,7 +70,7 @@
             <Grid Grid.Row="0">
                 <Label Style="{StaticResource CardNameTitleStyle}">
                     <Viewbox HorizontalAlignment="Stretch">
-                        <TextBlock Text="{Binding cardData.Name, ElementName=card}" TextWrapping="Wrap">
+                        <TextBlock Text="{Binding CurrentCard.Name, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:DeckEditPage}}}" TextWrapping="Wrap">
                             <TextBlock.Effect>
                                 <DropShadowEffect ShadowDepth="3" BlurRadius="10" Color="#000000"/>
                             </TextBlock.Effect>
@@ -79,7 +83,7 @@
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="7*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
@@ -95,8 +99,10 @@
                     </local:QuantityButton>
                 </Grid>
 
+                <Grid Name="CardSizingGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1"/>
+
                 <!-- Actual Card -->
-                <local:Card x:Name="card" Grid.Column="1">
+                <local:Card HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="card" Grid.Column="1" cardData="{Binding CurrentCard, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:DeckEditPage}}}">
 
                 </local:Card>
 
@@ -120,11 +126,39 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Row="0" Click="ImportImageButtonClicked">
+                        <Viewbox>
+                            <TextBlock TextAlignment="Center" Text="Import&#10;Image">
+                            </TextBlock>
+                        </Viewbox>
+                    </Button>
+                    
+                    <Button Grid.Row="1" Click="SetImageButtonClicked">
+                        <Viewbox>
+                            <TextBlock TextAlignment="Center" Text="Set Card&#10;Image">
+                            </TextBlock>
+                        </Viewbox>
+                    </Button>
+                </Grid>
+
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
+
+                    <Button Grid.Row="0" Click="SetNameButtonClicked">
+                        <Viewbox>
+                            <TextBlock TextAlignment="Center" Text="Set Card&#10;Name">
+                            </TextBlock>
+                        </Viewbox>
+                    </Button>
                 </Grid>
             </Grid>
         </Grid>

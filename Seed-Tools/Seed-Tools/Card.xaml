@@ -11,9 +11,8 @@
         <Grid.Background>
             <SolidColorBrush Color="Cornsilk"/>
         </Grid.Background>
-        <Image Name="MainImage" Margin="5" 
-               Source="{Binding MainImageSource, TargetNullValue='images/sample-card.png', 
-            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Card}}}">
+        <Image Name="MainImage" Margin="5" Stretch="UniformToFill" HorizontalAlignment="Center" VerticalAlignment="Center"
+               Source="{Binding MainImageSource, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:Card}}, TargetNullValue={StaticResource DefaultCardImageSource}}">
         </Image>
     </Grid>
 </UserControl>

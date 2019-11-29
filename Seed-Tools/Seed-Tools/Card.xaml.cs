@@ -27,15 +27,15 @@ namespace Seed_Tools
         }
 
         public static readonly DependencyProperty CardDataProperty =
-            DependencyProperty.Register("cardData", typeof(CardData), typeof(Card), new PropertyMetadata(new CardData()));
+            DependencyProperty.Register("cardData", typeof(CardData), typeof(Card), new PropertyMetadata(new CardData(), OnDataUpdated));
 
         public static readonly DependencyProperty MainImageSourceProperty =
-            DependencyProperty.Register(nameof(MainImageSource), typeof(string), typeof(Card),
-                new PropertyMetadata("images/sample-card.png", new PropertyChangedCallback(OnMainImageSourceChanged)));
+            DependencyProperty.Register(nameof(MainImageSource), typeof(ImageSource), typeof(Card),
+                new PropertyMetadata(null));
 
-        public string MainImageSource
+        public ImageSource MainImageSource
         {
-            get { return (string)GetValue(MainImageSourceProperty); }
+            get { return (ImageSource)GetValue(MainImageSourceProperty); }
             set { SetValue(MainImageSourceProperty, value); }
         }
 
@@ -49,16 +49,21 @@ namespace Seed_Tools
         {
             InitializeComponent();
             cardData = data;
-            MainImageSource = data.MainImageSourcePath;
         }
 
-        private static void OnMainImageSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
+        private static void OnDataUpdated(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
             Card card = d as Card;
             if (card != null)
             {
-                card.MainImage.Source = new BitmapImage(new Uri(card.MainImageSource, UriKind.RelativeOrAbsolute));
+                if (System.IO.File.Exists(card.cardData.MainImageSourcePath))
+                {
+                    card.MainImageSource = new BitmapImage(new Uri(System.IO.Path.GetFullPath(card.cardData.MainImageSourcePath), UriKind.RelativeOrAbsolute));
+                } else
+                {
+                    card.MainImageSource = null;
+                }
             }
-            Console.WriteLine("Card changed to MainImageSource: " + card.MainImageSource);
         }
     }
 }
