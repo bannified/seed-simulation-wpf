@@ -39,6 +39,8 @@ namespace Seed_Tools
         public System.Action<DeckData> OnDeckLoaded;
         public System.Action OnNewCardAdded;
 
+        public int CurrentSelectedCardIndex;
+
         public DeckEditPage()
         {
             InitializeComponent();
@@ -52,7 +54,7 @@ namespace Seed_Tools
 
             if (CardViews.Count > 0)
             {
-                CurrentCard = CardViews[0];
+                AllCardsListBox.SelectedIndex = CurrentSelectedCardIndex;
             }
 
             if (System.IO.File.Exists(Seed_Tools.Properties.Settings.Default.ActiveDeckPath))
@@ -223,9 +225,8 @@ namespace Seed_Tools
                 }
             }
 
-            
-            CurrentCard = new CardData();
             // Workaround to force the binding to update.
+            CurrentCard = null;
             CurrentCard = savedCard;
         }
 
@@ -277,8 +278,8 @@ namespace Seed_Tools
 
             RefreshCardLibrary();
 
-            CurrentCard = new CardData();
             // Workaround to force the binding to update.
+            CurrentCard = null;
             CurrentCard = savedCard;
         }
     }

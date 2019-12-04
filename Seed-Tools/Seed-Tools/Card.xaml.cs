@@ -54,7 +54,7 @@ namespace Seed_Tools
         private static void OnDataUpdated(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             Card card = d as Card;
-            if (card != null)
+            if (card != null && card.cardData != null)
             {
                 if (System.IO.File.Exists(card.cardData.MainImageSourcePath))
                 {
