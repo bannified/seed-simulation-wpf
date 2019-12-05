@@ -22,6 +22,8 @@ namespace Seed_Tools
     /// </summary>
     public partial class DeckEditPage : Page
     {
+
+        // Current Card that's shown on the Deck Edit Page
         public CardData CurrentCard
         {
             get { return (CardData)GetValue(CurrentCardProperty); }
@@ -32,39 +34,53 @@ namespace Seed_Tools
         public static readonly DependencyProperty CurrentCardProperty =
             DependencyProperty.Register("CurrentCard", typeof(CardData), typeof(DeckEditPage), new PropertyMetadata(new CardData()));
 
+        // Current Active Deck
         public DeckData ActiveDeckData { get; set; }
 
+        /**
+         * For All Cards Views
+         */
+        // Card Views for AllCardsViewsList
         public ObservableCollection<CardData> CardViews { get; set; }
 
+        public int CurrentSelectedCardIndex;
+
+        /**
+         * Events
+         */
         public System.Action<DeckData> OnDeckLoaded;
         public System.Action OnNewCardAdded;
-
-        public int CurrentSelectedCardIndex;
 
         public DeckEditPage()
         {
             InitializeComponent();
             ActiveDeckData = new DeckData();
+
+            // Setup Library's Cards List
             CardViews = new ObservableCollection<CardData>();
             AllCardsListBox.ItemsSource = CardViews;
-
-            OnDeckLoaded += RefreshDeckDisplay;
             RefreshCardLibrary();
             OnNewCardAdded += RefreshCardLibrary;
-
             if (CardViews.Count > 0)
             {
                 AllCardsListBox.SelectedIndex = CurrentSelectedCardIndex;
             }
+
+            // Setup Deck's view
+            OnDeckLoaded += RefreshDeckDisplay;
 
             if (System.IO.File.Exists(Seed_Tools.Properties.Settings.Default.ActiveDeckPath))
             {
                 LoadDeckAtPath(Seed_Tools.Properties.Settings.Default.ActiveDeckPath);
             }
 
+            // Setup Main Card view
             SizeChanged += ResizeCardView;
         }
 
+        /// <summary>
+        /// Resizes the Card's view to always respect our given aspect ratio of a card given in App.Constant
+        /// </summary>
         private void ResizeCardView(object sender, SizeChangedEventArgs e)
         {
             DeckEditPage page = sender as DeckEditPage;
@@ -87,16 +103,27 @@ namespace Seed_Tools
             }
         }
 
+        /// <summary>
+        /// RemoveCardButton Clicked
+        /// Removes x number of CurrentCard from the ActiveDeck
+        /// </summary>
         private void OnRemoveCardClicked(object sender, float e)
         {
 
         }
 
+        /// <summary>
+        /// AddCardButton Clicked
+        /// Adds x number of CurrentCard to the ActiveDeck
+        /// </summary>
         private void OnAddCardClicked(object sender, float e)
         {
 
         }
 
+        /// <summary>
+        /// Brings up the a Windows Dialog to select a deck file to load
+        /// </summary>
         private void DeckLoadClicked(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
@@ -120,6 +147,10 @@ namespace Seed_Tools
             }
         }
 
+        /// <summary>
+        /// Loads a deck file given its relative or full path
+        /// </summary>
+        /// <param name="path">Relative or full path of deck file</param>
         private void LoadDeckAtPath(string path)
         {
             string loadedText = System.IO.File.ReadAllText(path);
@@ -128,6 +159,9 @@ namespace Seed_Tools
             OnDeckLoaded?.Invoke(deck);
         }
 
+        /// <summary>
+        /// Brings up the a Windows Dialog to save the current Active Deck to a selected path
+        /// </summary>
         private void DeckSaveAsClicked(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.SaveFileDialog dialog = new Microsoft.Win32.SaveFileDialog();
@@ -152,16 +186,28 @@ namespace Seed_Tools
             }
         }
 
+        /// <summary>
+        /// Called when DeckNameTextBox loses focus. Saves the ActiveDeck's display name
+        /// </summary>
         private void DeckNameLostFocus(object sender, RoutedEventArgs e)
         {
             ActiveDeckData.DisplayName = DeckNameTextBox.Text;
         }
 
+        /// <summary>
+        /// Refreshes the whole deck's display based on input data.
+        /// This includes the deck's name and the list of cards.
+        /// </summary>
+        /// <param name="data">Deck Data</param>
         private void RefreshDeckDisplay(DeckData data)
         {
             DeckNameTextBox.Text = data.DisplayName;
         }
 
+        /// <summary>
+        /// Brings up Dialog to import an image.
+        /// Copies the image into the app's installation folder.
+        /// </summary>
         private void ImportImageButtonClicked(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
@@ -190,6 +236,9 @@ namespace Seed_Tools
             }
         }
 
+        /// <summary>
+        /// Brings up a dialog to select an image to set for the CurrentCard.
+        /// </summary>
         private void SetImageButtonClicked(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
@@ -209,7 +258,7 @@ namespace Seed_Tools
             if (result == true)
             {
                 string filepath = dialog.FileName;
-                if (System.IO.File.Exists(filepath)) // does not exist, go ahead and copy
+                if (System.IO.File.Exists(filepath)) // exists, set the image path
                 {
                     if (CurrentCard != null)
                     {
@@ -230,6 +279,9 @@ namespace Seed_Tools
             CurrentCard = savedCard;
         }
 
+        /// <summary>
+        /// Adds a new card to the Library.
+        /// </summary>
         private void AddNewCardClicked(object sender, RoutedEventArgs e)
         {
             string randomId = App.CastedInstance.random.Next().ToString();
@@ -243,6 +295,9 @@ namespace Seed_Tools
             OnNewCardAdded();
         }
 
+        /// <summary>
+        /// Refreshes the list of cards in Library.
+        /// </summary>
         public void RefreshCardLibrary()
         {
             CardViews.Clear();
@@ -253,6 +308,9 @@ namespace Seed_Tools
             }
         }
 
+        /// <summary>
+        /// Sets CurrentCard based on selection from AllCardsListBox
+        /// </summary>
         private void CardSelectedFromList(object sender, SelectionChangedEventArgs e)
         {
             if (AllCardsListBox.SelectedItem == null)
@@ -263,6 +321,9 @@ namespace Seed_Tools
             CurrentCard = AllCardsListBox.SelectedItem as CardData;
         }
 
+        /// <summary>
+        /// Brings up a dialog to set the CurrentCard's name.
+        /// </summary>
         private void SetNameButtonClicked(object sender, RoutedEventArgs e)
         {
             TextInputWindow inputWindow = new TextInputWindow("Change Card Title", "New Card Title");

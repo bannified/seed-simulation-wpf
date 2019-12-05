@@ -9,6 +9,9 @@ namespace Seed_Tools
 {
     public partial class App : Application
     {
+        /// <summary>
+        /// All pre-defined constants for Seed Tools
+        /// </summary>
         public partial class Constants
         {
             public partial class FileExtensions
@@ -17,11 +20,17 @@ namespace Seed_Tools
                 public static readonly string CARD_LIBRARY = ".clb";
             }
 
+            /// <summary>
+            /// Common directories that this app uses
+            /// </summary>
             public partial class Paths
             {
                 public static readonly string CARD_IMAGES_PATH = "./images/";
             }
 
+            /// <summary>
+            /// Common File Dialog Filters
+            /// </summary>
             public partial class FileDialogFilters
             {
                 public static readonly string GRAPHICS_FILTER = "All Graphics Types|*.bmp;*.jpg;*.jpeg;*.png;*.tif;*.tiff" + "BMP|*.bmp|GIF|*.gif|JPG|*.jpg;*.jpeg|PNG|*.png|TIFF|*.tif;*.tiff|";

@@ -28,7 +28,7 @@ namespace Seed_Tools
             // load user settings
             Seed_Tools.Properties.Settings.Default.Reload();
 
-            CheckLibraries();
+            CheckAndValidateData();
         }
 
         protected override void OnExit(ExitEventArgs e)
@@ -40,17 +40,29 @@ namespace Seed_Tools
             Seed_Tools.Properties.Settings.Default.Save();
         }
 
+        /// <summary>
+        /// Gets the assembly's path.
+        /// </summary>
+        /// <returns>Root path of app</returns>
         public static string GetRootPath()
         {
             return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         }
 
+        /// <summary>
+        /// Returns the relative path given its full path.
+        /// </summary>
+        /// <param name="fullPath"></param>
+        /// <returns>A file path relative to the assembly's path.</returns>
         public static string GetRelativePathFromFullPath(string fullPath)
         {
             return fullPath.Replace(GetRootPath(), ".");
         }
 
-        void CheckLibraries()
+        /// <summary>
+        /// Checks and validates all data. Creates defaults if anything is missing.
+        /// </summary>
+        void CheckAndValidateData()
         {
             if (!System.IO.File.Exists(Seed_Tools.Properties.Settings.Default.ActiveDeckPath))
             {
@@ -61,6 +73,10 @@ namespace Seed_Tools
             LoadCurrentCardLibrary();
         }
 
+        /// <summary>
+        /// Loads the card library at the default card library path.
+        /// If there's no card library, then a blank one is made.
+        /// </summary>
         public void LoadCurrentCardLibrary()
         {
             string path = Seed_Tools.Properties.Settings.Default.CardLibraryPath;
@@ -74,6 +90,9 @@ namespace Seed_Tools
             }
         }
 
+        /// <summary>
+        /// Saves the current card library to the default path.
+        /// </summary>
         public void SaveCurrentCardLibrary()
         {
             string path = Seed_Tools.Properties.Settings.Default.CardLibraryPath;

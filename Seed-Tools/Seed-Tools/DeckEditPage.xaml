@@ -89,7 +89,8 @@
 
                 <!-- Remove card from deck Control -->
                 <Grid Grid.Column="0">
-                    <local:QuantityButton ButtonText="Rem&#10;&lt;&lt;&lt;" 
+                    <local:QuantityButton x:Name="RemoveCardButton"
+                                          ButtonText="Rem&#10;&lt;&lt;&lt;" 
                                           Grid.Row="0"
                                           Padding="0" 
                                           VerticalAlignment="Center" 
@@ -108,7 +109,8 @@
 
                 <!-- Add card from deck Control -->
                 <Grid Grid.Column="2">
-                    <local:QuantityButton ButtonText="Add&#10;&gt;&gt;&gt;" 
+                    <local:QuantityButton x:Name="AddCardButton"
+                                          ButtonText="Add&#10;&gt;&gt;&gt;" 
                                           Grid.Row="0"
                                           Padding="0" 
                                           VerticalAlignment="Center"

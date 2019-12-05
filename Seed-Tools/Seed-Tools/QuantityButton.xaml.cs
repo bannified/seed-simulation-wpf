@@ -17,6 +17,7 @@ namespace Seed_Tools
 {
     /// <summary>
     /// Interaction logic for QuantityButton.xaml
+    /// Simple Button that fires an event with a user-defined numeric value when clicked.
     /// </summary>
     public partial class QuantityButton : UserControl
     {
@@ -62,12 +63,18 @@ namespace Seed_Tools
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Checks input to ensure that it is a number.
+        /// </summary>
         private void QuantityInputCheck(object sender, TextCompositionEventArgs e)
         {
             int res = 0;
             e.Handled = !(int.TryParse(e.Text, out res) || (e.Text == "."));
         }
 
+        /// <summary>
+        /// Checks that text is a number
+        /// </summary>
         private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
             float res = 0;

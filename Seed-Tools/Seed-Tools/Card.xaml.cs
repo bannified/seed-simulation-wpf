@@ -17,6 +17,7 @@ namespace Seed_Tools
 {
     /// <summary>
     /// Interaction logic for Card.xaml
+    /// A view for a typical card in a deck.
     /// </summary>
     public partial class Card : UserControl
     {

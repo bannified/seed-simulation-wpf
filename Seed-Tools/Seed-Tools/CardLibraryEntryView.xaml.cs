@@ -17,6 +17,7 @@ namespace Seed_Tools
 {
     /// <summary>
     /// Interaction logic for CardLibraryEntryView.xaml
+    /// An entry in the card library list.
     /// </summary>
     public partial class CardLibraryEntryView : UserControl
     {

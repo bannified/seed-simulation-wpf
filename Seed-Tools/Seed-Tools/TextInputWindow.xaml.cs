@@ -16,6 +16,7 @@ namespace Seed_Tools
 {
     /// <summary>
     /// Interaction logic for TextInputWindow.xaml
+    /// Simple dialog to input a string of letters.
     /// </summary>
     public partial class TextInputWindow : Window
     {
@@ -50,12 +51,18 @@ namespace Seed_Tools
             this.InputBoxTitle = inputBoxTitle;
         }
 
+        /// <summary>
+        /// Cancel Button clicked, returns false for result.
+        /// </summary>
         private void CancelButtonClicked(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
             Close();
         }
 
+        /// <summary>
+        /// Cancel Button clicked, returns true for result.
+        /// </summary>
         private void ConfirmButtonClicked(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
