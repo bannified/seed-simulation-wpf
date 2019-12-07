@@ -22,7 +22,7 @@
             </Grid.Background>
 
             <Viewbox Grid.Column="0" HorizontalAlignment="Left">
-                <TextBlock Name="NameTextBox" Text="{Binding Card.Name, TargetNullValue='Unable to Load card'}" TextAlignment="Left" HorizontalAlignment="Stretch" >
+                <TextBlock Name="NameTextBox" Text="{Binding Card.Name, TargetNullValue='Unable to Load card'}" TextAlignment="Left" HorizontalAlignment="Left">
                     <TextBlock.Background>
                         <SolidColorBrush Opacity="0"/>
                     </TextBlock.Background>
@@ -31,7 +31,7 @@
 
             <!-- Number text -->
             <Viewbox Grid.Column="1" HorizontalAlignment="Right">
-                <TextBlock Name="NumberTextBlock" Text="{Binding Count, TargetNullValue='-1'}" TextAlignment="Right" HorizontalAlignment="Stretch">
+                <TextBlock Name="NumberTextBlock" Text="{Binding Count, TargetNullValue='-1'}" TextAlignment="Right" HorizontalAlignment="Right">
                     <TextBlock.Background>
                         <SolidColorBrush Opacity="0"/>
                     </TextBlock.Background>

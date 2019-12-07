@@ -21,13 +21,6 @@ namespace Seed_Tools
     /// </summary>
     public partial class CardLibraryEntryView : UserControl
     {
-        public CardData card { get; set; }
-
-        public CardLibraryEntryView(CardData data) : this()
-        {
-            card = data;
-        }
-
         public CardLibraryEntryView()
         {
             InitializeComponent();

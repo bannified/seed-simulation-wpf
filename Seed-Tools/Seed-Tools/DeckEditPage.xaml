@@ -196,7 +196,7 @@
             
 
             <ScrollViewer Name="DeckCardsScrollView" Margin="10,0,0,0" Grid.Row="1" HorizontalScrollBarVisibility="Hidden" HorizontalAlignment="Stretch">
-                <ListBox Name="DeckCardsListBox">
+                <ListBox Name="DeckCardsListBox" HorizontalContentAlignment="Stretch" SelectionMode="Single" SelectionChanged="CardSelectedFromDeckList">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <local:DeckCardEntryView/>

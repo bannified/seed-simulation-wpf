@@ -52,8 +52,8 @@ namespace Seed_Tools
         /**
          * Events
          */
-        public System.Action<DeckData> OnDeckLoaded;
-        public System.Action OnNewCardAdded;
+        public System.Action OnDeckLoaded;
+        public System.Action OnCardLibraryUpdated;
 
         public DeckEditPage()
         {
@@ -64,7 +64,8 @@ namespace Seed_Tools
             CardViews = new ObservableCollection<CardData>();
             AllCardsListBox.ItemsSource = CardViews;
             RefreshCardLibrary();
-            OnNewCardAdded += RefreshCardLibrary;
+            OnCardLibraryUpdated += RefreshDeckDisplay;
+
             if (CardViews.Count > 0)
             {
                 AllCardsListBox.SelectedIndex = CurrentSelectedCardIndex;
@@ -72,7 +73,9 @@ namespace Seed_Tools
 
             // Setup Deck's view
             DeckCardViews = new ObservableCollection<DeckEntryData>();
+            DeckCardsListBox.ItemsSource = DeckCardViews;
             OnDeckLoaded += RefreshDeckDisplay;
+            OnCardLibraryUpdated += RefreshDeckDisplay;
 
             if (System.IO.File.Exists(Seed_Tools.Properties.Settings.Default.ActiveDeckPath))
             {
@@ -114,7 +117,20 @@ namespace Seed_Tools
         /// </summary>
         private void OnRemoveCardClicked(object sender, float e)
         {
+            if (RemoveCardButton.CurrentQuantity <= 0)
+            {
+                return;
+            }
+            if (ActiveDeckData.CardIdToCount.ContainsKey(CurrentCard.id))
+            {
+                ActiveDeckData.CardIdToCount[CurrentCard.id] -= (int)Math.Round(RemoveCardButton.CurrentQuantity);
+                if (ActiveDeckData.CardIdToCount[CurrentCard.id] <= 0)
+                {
+                    ActiveDeckData.CardIdToCount.Remove(CurrentCard.id);
+                }
+            }
 
+            RefreshDeckDisplay();
         }
 
         /// <summary>
@@ -123,7 +139,19 @@ namespace Seed_Tools
         /// </summary>
         private void OnAddCardClicked(object sender, float e)
         {
+            if (AddCardButton.CurrentQuantity <= 0)
+            {
+                return;
+            }
+            if (ActiveDeckData.CardIdToCount.ContainsKey(CurrentCard.id))
+            {
+                ActiveDeckData.CardIdToCount[CurrentCard.id] += (int)Math.Round(AddCardButton.CurrentQuantity);
+            } else
+            {
+                ActiveDeckData.CardIdToCount.Add(CurrentCard.id, (int)Math.Round(AddCardButton.CurrentQuantity));
+            }
 
+            RefreshDeckDisplay();
         }
 
         /// <summary>
@@ -165,7 +193,7 @@ namespace Seed_Tools
                 Console.WriteLine("Null Deck");
             }
             ActiveDeckData = deck;
-            OnDeckLoaded?.Invoke(deck);
+            OnDeckLoaded?.Invoke();
         }
 
         /// <summary>
@@ -208,9 +236,9 @@ namespace Seed_Tools
         /// This includes the deck's name and the list of cards.
         /// </summary>
         /// <param name="data">Deck Data</param>
-        private void RefreshDeckDisplay(DeckData data)
+        private void RefreshDeckDisplay()
         {
-            DeckNameTextBox.Text = data.DisplayName;
+            DeckNameTextBox.Text = ActiveDeckData.DisplayName;
 
             DeckCardViews.Clear();
 
@@ -314,7 +342,7 @@ namespace Seed_Tools
             App.CastedInstance.CardLibrary.Add(randomId, new CardData());
 
             CurrentCard = App.CastedInstance.CardLibrary[randomId];
-            OnNewCardAdded();
+            OnCardLibraryUpdated?.Invoke();
         }
 
         /// <summary>
@@ -328,6 +356,7 @@ namespace Seed_Tools
             {
                 CardViews.Add(kv.Value);
             }
+            OnCardLibraryUpdated?.Invoke();
         }
 
         /// <summary>
@@ -364,6 +393,21 @@ namespace Seed_Tools
             // Workaround to force the binding to update.
             CurrentCard = null;
             CurrentCard = savedCard;
+        }
+
+        private void CardSelectedFromDeckList(object sender, SelectionChangedEventArgs e)
+        {
+            if (DeckCardsListBox.SelectedItem == null)
+            {
+                return;
+            }
+
+            DeckEntryData entry = DeckCardsListBox.SelectedItem as DeckEntryData;
+            CurrentCard = entry.Card;
+
+            DeckCardsListBox.SelectedItem = null;
+
+            AllCardsListBox.SelectedItem = CurrentCard;
         }
     }
 }

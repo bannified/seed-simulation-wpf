@@ -8,8 +8,8 @@ namespace Seed_Tools
 {
     public class DeckEntryData
     {
-        public CardData Card;
-        public int Count;
+        public CardData Card { get; set; }
+        public int Count { get; set; }
 
         public DeckEntryData(CardData data, int count)
         {
