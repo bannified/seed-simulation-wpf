@@ -11,15 +11,20 @@ namespace Seed_Tools
     /// </summary>
     public class CardData
     {
-        public int id { get; set; }
+        public string id { get; set; }
         public string Name { get; set; }
         public string MainImageSourcePath { get; set; }
 
         public CardData()
         {
-            id = -1;
+            id = "-1";
             Name = "Invalid Card";
             MainImageSourcePath = "images/sample-card.png";
+        }
+
+        public CardData(string id) : this()
+        {
+            this.id = id;
         }
     }
 }

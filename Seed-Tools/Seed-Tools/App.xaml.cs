@@ -71,6 +71,11 @@ namespace Seed_Tools
             }
 
             LoadCurrentCardLibrary();
+
+            foreach (var kv in CardLibrary)
+            {
+                kv.Value.id = kv.Key;
+            }
         }
 
         /// <summary>
@@ -98,6 +103,7 @@ namespace Seed_Tools
             string path = Seed_Tools.Properties.Settings.Default.CardLibraryPath;
             System.IO.FileStream fs = System.IO.File.Create(path);
             fs.Close();
+
             string resultJson = JsonConvert.SerializeObject(CardLibrary);
             System.IO.File.WriteAllText(path, resultJson);
         }
