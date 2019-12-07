@@ -63,8 +63,8 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Json.Net, Version=1.0.18.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Json.Net.1.0.18\lib\netstandard2.0\Json.Net.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -94,10 +94,14 @@
       <DependentUpon>CardLibraryEntryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="DeckCardEntryView.xaml.cs">
+      <DependentUpon>DeckCardEntryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DeckData.cs" />
     <Compile Include="DeckEditPage.xaml.cs">
       <DependentUpon>DeckEditPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DeckEntryData.cs" />
     <Compile Include="HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -118,6 +122,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="CardLibraryEntryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeckCardEntryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="Seed_Tools.DeckCardEntryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Seed_Tools"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="600"
+             HorizontalAlignment="Stretch">
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="AliceBlue" Opacity="0"/>
+        </Grid.Background>
+
+        <Grid HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Background>
+                <SolidColorBrush Opacity="0"/>
+            </Grid.Background>
+
+            <Viewbox Grid.Column="0" HorizontalAlignment="Left">
+                <TextBlock Name="NameTextBox" Text="{Binding Card.Name, TargetNullValue='Unable to Load card'}" TextAlignment="Left" HorizontalAlignment="Stretch" >
+                    <TextBlock.Background>
+                        <SolidColorBrush Opacity="0"/>
+                    </TextBlock.Background>
+                </TextBlock>
+            </Viewbox>
+
+            <!-- Number text -->
+            <Viewbox Grid.Column="1" HorizontalAlignment="Right">
+                <TextBlock Name="NumberTextBlock" Text="{Binding Count, TargetNullValue='-1'}" TextAlignment="Right" HorizontalAlignment="Stretch">
+                    <TextBlock.Background>
+                        <SolidColorBrush Opacity="0"/>
+                    </TextBlock.Background>
+                </TextBlock>
+            </Viewbox>
+        </Grid>
+    </Grid>
+</UserControl>

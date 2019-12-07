@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Json.Net;
+using Newtonsoft.Json;
 
 namespace Seed_Tools
 {
@@ -12,7 +12,7 @@ namespace Seed_Tools
         public DeckData()
         {
             DisplayName = "default";
-            Cards = new List<CardData>();
+            CardIdToCount = new Dictionary<string, int>();
         }
 
         public DeckData(string displayName) : base()
@@ -21,13 +21,13 @@ namespace Seed_Tools
         }
 
         public string DisplayName { get; set; }
-        public List<CardData> Cards { get; set; }
+        public Dictionary<string, int> CardIdToCount { get; set; }
 
         public static void CreateDefaultDeckDataAtPath(string path, string defaultName = "default")
         {
             System.IO.FileStream fs = System.IO.File.Create(path);
             fs.Close();
-            string resultJson = JsonNet.Serialize(new DeckData(defaultName));
+            string resultJson = JsonConvert.SerializeObject(new DeckData(defaultName));
             System.IO.File.WriteAllText(path, resultJson);
         }
     }

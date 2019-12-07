@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Json.Net;
+using Newtonsoft.Json;
 
 namespace Seed_Tools
 {
@@ -22,7 +22,6 @@ namespace Seed_Tools
     /// </summary>
     public partial class DeckEditPage : Page
     {
-
         // Current Card that's shown on the Deck Edit Page
         public CardData CurrentCard
         {
@@ -34,9 +33,6 @@ namespace Seed_Tools
         public static readonly DependencyProperty CurrentCardProperty =
             DependencyProperty.Register("CurrentCard", typeof(CardData), typeof(DeckEditPage), new PropertyMetadata(new CardData()));
 
-        // Current Active Deck
-        public DeckData ActiveDeckData { get; set; }
-
         /**
          * For All Cards Views
          */
@@ -44,6 +40,14 @@ namespace Seed_Tools
         public ObservableCollection<CardData> CardViews { get; set; }
 
         public int CurrentSelectedCardIndex;
+
+        /**
+         * For Deck list cards
+         */
+        // Current Active Deck
+        public DeckData ActiveDeckData { get; set; }
+
+        public ObservableCollection<DeckEntryData> DeckCardViews { get; set; }
 
         /**
          * Events
@@ -67,6 +71,7 @@ namespace Seed_Tools
             }
 
             // Setup Deck's view
+            DeckCardViews = new ObservableCollection<DeckEntryData>();
             OnDeckLoaded += RefreshDeckDisplay;
 
             if (System.IO.File.Exists(Seed_Tools.Properties.Settings.Default.ActiveDeckPath))
@@ -154,7 +159,11 @@ namespace Seed_Tools
         private void LoadDeckAtPath(string path)
         {
             string loadedText = System.IO.File.ReadAllText(path);
-            DeckData deck = JsonNet.Deserialize<DeckData>(loadedText);
+            DeckData deck = JsonConvert.DeserializeObject<DeckData>(loadedText);
+            if (deck == null)
+            {
+                Console.WriteLine("Null Deck");
+            }
             ActiveDeckData = deck;
             OnDeckLoaded?.Invoke(deck);
         }
@@ -181,7 +190,7 @@ namespace Seed_Tools
 
                 System.IO.FileStream fs = System.IO.File.Create(filename);
                 fs.Close();
-                string resultJson = JsonNet.Serialize(ActiveDeckData);
+                string resultJson = JsonConvert.SerializeObject(ActiveDeckData);
                 System.IO.File.WriteAllText(filename, resultJson);
             }
         }
@@ -202,6 +211,19 @@ namespace Seed_Tools
         private void RefreshDeckDisplay(DeckData data)
         {
             DeckNameTextBox.Text = data.DisplayName;
+
+            DeckCardViews.Clear();
+
+            foreach (var kv in ActiveDeckData.CardIdToCount)
+            {
+                CardData card;
+                App.CastedInstance.CardLibrary.TryGetValue(kv.Key, out card);
+                if (card != null)
+                {
+                    DeckEntryData entry = new DeckEntryData(card, kv.Value);
+                    DeckCardViews.Add(entry);
+                }
+            }
         }
 
         /// <summary>

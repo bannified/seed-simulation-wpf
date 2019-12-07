@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.IO;
 using System.Reflection;
-using Json.Net;
+using Newtonsoft.Json;
 
 namespace Seed_Tools
 {
@@ -85,7 +85,7 @@ namespace Seed_Tools
                 CardLibrary = new Dictionary<string, CardData>();
             } else
             {
-                Dictionary<string, CardData> data = JsonNet.Deserialize< Dictionary<string, CardData> >(System.IO.File.ReadAllText(path));
+                Dictionary<string, CardData> data = JsonConvert.DeserializeObject< Dictionary<string, CardData> >(System.IO.File.ReadAllText(path));
                 CardLibrary = data;
             }
         }
@@ -98,7 +98,7 @@ namespace Seed_Tools
             string path = Seed_Tools.Properties.Settings.Default.CardLibraryPath;
             System.IO.FileStream fs = System.IO.File.Create(path);
             fs.Close();
-            string resultJson = JsonNet.Serialize(CardLibrary);
+            string resultJson = JsonConvert.SerializeObject(CardLibrary);
             System.IO.File.WriteAllText(path, resultJson);
         }
 	}
