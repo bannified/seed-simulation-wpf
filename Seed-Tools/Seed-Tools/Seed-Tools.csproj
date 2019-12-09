@@ -114,6 +114,7 @@
     <Compile Include="SimulationHome.xaml.cs">
       <DependentUpon>SimulationHome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Suit.cs" />
     <Compile Include="TextInputWindow.xaml.cs">
       <DependentUpon>TextInputWindow.xaml</DependentUpon>
     </Compile>
