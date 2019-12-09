@@ -82,87 +82,73 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="App\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Card.xaml.cs">
+    <Compile Include="SpecializedViews\Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CardData.cs" />
-    <Compile Include="CardLibraryEntryView.xaml.cs">
+    <Compile Include="Classes\CardData.cs" />
+    <Compile Include="SpecializedViews\CardLibraryEntryView.xaml.cs">
       <DependentUpon>CardLibraryEntryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Constants.cs" />
-    <Compile Include="DeckCardEntryView.xaml.cs">
+    <Compile Include="App\Constants.cs" />
+    <Compile Include="SpecializedViews\DeckCardEntryView.xaml.cs">
       <DependentUpon>DeckCardEntryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DeckData.cs" />
-    <Compile Include="DeckEditPage.xaml.cs">
+    <Compile Include="Classes\DeckData.cs" />
+    <Compile Include="Pages\DeckEditPage.xaml.cs">
       <DependentUpon>DeckEditPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DeckEntryData.cs" />
-    <Compile Include="HomePage.xaml.cs">
+    <Compile Include="Classes\DeckEntryData.cs" />
+    <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="QuantityButton.xaml.cs">
+    <Compile Include="CommonViews\QuantityButton.xaml.cs">
       <DependentUpon>QuantityButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SeedToolsHome.xaml.cs">
-      <DependentUpon>SeedToolsHome.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SimulationHome.xaml.cs">
-      <DependentUpon>SimulationHome.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Suit.cs" />
-    <Compile Include="TextInputWindow.xaml.cs">
+    <Compile Include="Classes\Suit.cs" />
+    <Compile Include="CommonViews\TextInputWindow.xaml.cs">
       <DependentUpon>TextInputWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Card.xaml">
+    <Page Include="SpecializedViews\Card.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="CardLibraryEntryView.xaml">
+    <Page Include="SpecializedViews\CardLibraryEntryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DeckCardEntryView.xaml">
+    <Page Include="SpecializedViews\DeckCardEntryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DeckEditPage.xaml">
+    <Page Include="Pages\DeckEditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="HomePage.xaml">
+    <Page Include="Pages\HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="App\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="App\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="App\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="QuantityButton.xaml">
+    <Page Include="CommonViews\QuantityButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SeedToolsHome.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SimulationHome.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TextInputWindow.xaml">
+    <Page Include="CommonViews\TextInputWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -193,7 +179,7 @@
     <None Include="Seed-Tools_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App\App.config" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\bg.png" />
