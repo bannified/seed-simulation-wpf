@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 
-namespace Seed_Tools.Pages
+namespace Seed_Tools
 {
     /// <summary>
     /// Interaction logic for RulesEditPage.xaml
@@ -37,7 +37,7 @@ namespace Seed_Tools.Pages
 
         // Using a DependencyProperty as the backing store for CurrentSuit.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty CurrentSuitProperty =
-            DependencyProperty.Register("CurrentSuit", typeof(Suit), typeof(RulesEditPage), new PropertyMetadata(0));
+            DependencyProperty.Register("CurrentSuit", typeof(Suit), typeof(RulesEditPage), new PropertyMetadata(new Suit()));
 
         public ImageSource SuitImageSource
         {
@@ -49,7 +49,7 @@ namespace Seed_Tools.Pages
         public static readonly DependencyProperty SuitImageSourceProperty =
             DependencyProperty.Register("SuitImageSource", typeof(ImageSource), typeof(RulesEditPage), new PropertyMetadata(null));
 
-        public ObservableCollection<Suit> AllSuits { get; set; }
+        public ObservableCollection<Suit> AllSuits { get; set; } = new ObservableCollection<Suit>();
 
         private void SuitSelected(object sender, SelectionChangedEventArgs e)
         {

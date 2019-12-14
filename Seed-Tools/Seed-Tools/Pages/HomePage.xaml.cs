@@ -38,7 +38,8 @@ namespace Seed_Tools
 
         private void RulesButton_Click(object sender, RoutedEventArgs e)
         {
-
+            RulesEditPage ruleEditPage = new RulesEditPage();
+            this.NavigationService.Navigate(ruleEditPage);
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)

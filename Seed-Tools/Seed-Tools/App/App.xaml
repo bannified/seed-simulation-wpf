@@ -9,7 +9,7 @@
         <properties:Settings x:Key="Settings"/>
         
         <!-- Defaults -->
-        <BitmapImage x:Key="DefaultCardImageSource" UriSource="./images/sample-card.png">
+        <BitmapImage x:Key="DefaultCardImageSource" UriSource="/Seed-Tools;component/images/sample-card.png">
             
         </BitmapImage>
 

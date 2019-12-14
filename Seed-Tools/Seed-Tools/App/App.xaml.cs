@@ -72,7 +72,7 @@ namespace Seed_Tools
                 DeckData.CreateDefaultDeckDataAtPath(Seed_Tools.Properties.Settings.Default.ActiveDeckPath);
             }
 
-            LoadCurrentCardLibrary();
+            LoadSeedData();
 
             foreach (var kv in CardLibrary)
             {
@@ -84,7 +84,7 @@ namespace Seed_Tools
         /// Loads the card library at the default card library path.
         /// If there's no card library, then a blank one is made.
         /// </summary>
-        public void LoadCurrentCardLibrary()
+        public void LoadSeedData()
         {
             string path = Seed_Tools.Properties.Settings.Default.CardLibraryPath;
             if (!System.IO.File.Exists(Seed_Tools.Properties.Settings.Default.CardLibraryPath))
@@ -92,8 +92,9 @@ namespace Seed_Tools
                 CardLibrary = new Dictionary<string, CardData>();
             } else
             {
-                Dictionary<string, CardData> data = JsonConvert.DeserializeObject< Dictionary<string, CardData> >(System.IO.File.ReadAllText(path));
-                CardLibrary = data;
+                SeedData data = JsonConvert.DeserializeObject< SeedData >(System.IO.File.ReadAllText(path));
+                CardLibrary = data.AllCards;
+                SuitsCollection = data.Suits;
             }
         }
 
@@ -106,7 +107,11 @@ namespace Seed_Tools
             System.IO.FileStream fs = System.IO.File.Create(path);
             fs.Close();
 
-            string resultJson = JsonConvert.SerializeObject(CardLibrary);
+            SeedData saveData = new SeedData();
+            saveData.AllCards = CardLibrary;
+            saveData.Suits = SuitsCollection;
+
+            string resultJson = JsonConvert.SerializeObject(saveData);
             System.IO.File.WriteAllText(path, resultJson);
         }
 	}

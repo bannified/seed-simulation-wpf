@@ -5,5 +5,5 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Seed_Tools"
         mc:Ignorable="d"
-        Title="Seed Tools - Development Build" Height="540" Width="960" Source="HomePage.xaml">
+        Title="Seed Tools - Development Build" Height="540" Width="960" Source="/Seed-Tools;component/Pages/HomePage.xaml">
 </NavigationWindow>

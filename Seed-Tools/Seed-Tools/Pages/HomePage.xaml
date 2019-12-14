@@ -9,7 +9,7 @@
       Title="HomePage">
 
     <Page.Background>
-        <ImageBrush ImageSource="images/bg.png"/>
+        <ImageBrush ImageSource="/Seed-Tools;component/images/bg.png"/>
     </Page.Background>
 
     <Grid>
