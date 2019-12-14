@@ -27,7 +27,7 @@ namespace Seed_Tools
         {
             System.IO.FileStream fs = System.IO.File.Create(path);
             fs.Close();
-            string resultJson = JsonConvert.SerializeObject(new DeckData(defaultName));
+            string resultJson = JsonConvert.SerializeObject(new DeckData(defaultName), Formatting.Indented);
             System.IO.File.WriteAllText(path, resultJson);
         }
     }

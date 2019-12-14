@@ -112,7 +112,7 @@ namespace Seed_Tools
             saveData.AllCards = CardLibrary;
             saveData.Suits = SuitsCollection;
 
-            string resultJson = JsonConvert.SerializeObject(saveData);
+            string resultJson = JsonConvert.SerializeObject(saveData, Formatting.Indented);
             System.IO.File.WriteAllText(path, resultJson);
         }
 	}
