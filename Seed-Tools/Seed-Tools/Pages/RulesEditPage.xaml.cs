@@ -148,5 +148,34 @@ namespace Seed_Tools
                 SuitsListBox.SelectedItem = lastSelected;
             }
         }
+
+        private void ImportImageButtonClicked(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.InitialDirectory = App.GetRootPath();
+            dialog.Multiselect = false;
+            dialog.Filter = App.Constants.FileDialogFilters.GRAPHICS_FILTER;
+
+            Nullable<bool> result = dialog.ShowDialog();
+
+            if (result == true)
+            {
+                string filepath = dialog.FileName;
+                string destinationPath = App.Constants.Paths.CARD_IMAGES_PATH + System.IO.Path.GetFileName(filepath);
+                if (!System.IO.File.Exists(destinationPath)) // does not exist, go ahead and copy
+                {
+                    if (!System.IO.Directory.Exists(App.Constants.Paths.CARD_IMAGES_PATH))
+                    {
+                        System.IO.Directory.CreateDirectory(App.Constants.Paths.CARD_IMAGES_PATH);
+                    }
+                    System.IO.File.Copy(filepath, destinationPath);
+                }
+                else
+                {
+                    MessageBox.Show("File already exists. Try renaming the file you're important or the file that currently exists in the 'images' directory",
+                        "Image File already exists");
+                }
+            }
+        }
     }
 }
