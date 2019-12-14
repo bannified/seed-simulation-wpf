@@ -123,14 +123,7 @@ namespace Seed_Tools
             }
 
             BitmapImage image = new BitmapImage(new Uri(CurrentSuit.ImagePath, UriKind.RelativeOrAbsolute));
-            if (image.DecodePixelHeight != 0 && image.DecodePixelWidth != 0)
-            {
-                SuitImageSource = image;
-            }
-            else
-            {
-                SuitImageSource = null;
-            }
+            SuitImageSource = image;
         }
 
         private void AddNewSuitClicked(object sender, RoutedEventArgs e)

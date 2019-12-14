@@ -42,9 +42,9 @@
                     </Grid.RowDefinitions>
 
                     <Viewbox Grid.Row="0">
-                        <TextBox>
+                        <TextBlock>
                             Suits
-                        </TextBox>
+                        </TextBlock>
                     </Viewbox>
                     <ScrollViewer Grid.Row="1" Margin="0,0,0,0" HorizontalScrollBarVisibility="Hidden">
                         <ListBox Name="SuitsListBox" SelectionChanged="SuitSelected">
@@ -62,9 +62,9 @@
                     </ScrollViewer>
                     <Button Grid.Row="2" Margin="5,0" Click="AddNewSuitClicked">
                         <Viewbox>
-                            <TextBox>
+                            <TextBlock>
                                 Add new suit
-                            </TextBox>
+                            </TextBlock>
                         </Viewbox>
                     </Button>
                 </Grid>
@@ -82,9 +82,9 @@
                             <RowDefinition Height="3*"/>
                         </Grid.RowDefinitions>
                         <Viewbox Grid.Row="0">
-                            <TextBox>
+                            <TextBlock>
                                 Suit Name
-                            </TextBox>
+                            </TextBlock>
                         </Viewbox>
                         <TextBox Name="SuitNameTextBox" LostFocus="SuitNameTextBoxLostFocus" Grid.Row="1">
                         </TextBox>
@@ -96,22 +96,19 @@
                             <RowDefinition Height="3*"/>
                         </Grid.RowDefinitions>
                         <Viewbox Grid.Row="0">
-                            <TextBox>
+                            <TextBlock>
                                 Suit Value
-                            </TextBox>
+                            </TextBlock>
                         </Viewbox>
                         <TextBox Name="SuitValueTextBox" LostFocus="SuitValueTextBoxLostFocus" Grid.Row="1">
                         </TextBox>
                     </Grid>
                     <Grid Grid.Row="2" Margin="0,0.4,-0.2,0.2">
-                        <Button Click="SelectSuitImageButtonClicked" Margin="0,0,0,-1">
+                        <Button Click="SelectSuitImageButtonClicked">
                             <Viewbox Grid.Row="0">
-                                <TextBox>
-                                    <TextBox.Background>
-                                        <SolidColorBrush Opacity="0"/>
-                                    </TextBox.Background>
+                                <TextBlock>
                                     Select Suit Image
-                                </TextBox>
+                                </TextBlock>
                             </Viewbox>
                         </Button>
                     </Grid>
