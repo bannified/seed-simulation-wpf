@@ -22,6 +22,8 @@ namespace Seed_Tools
 
         public static App CastedInstance { get { return Current as App; } }
 
+        public List<Suit> SuitsCollection { get; set; }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);

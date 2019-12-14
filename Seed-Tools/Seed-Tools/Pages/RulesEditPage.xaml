@@ -1,0 +1,145 @@
+﻿<Page x:Class="Seed_Tools.Pages.RulesEditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Seed_Tools.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RulesEditPage">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="../images/egoistbg2.png" Stretch="UniformToFill"/>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Suits Modification Row -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <Viewbox Grid.Row="0">
+                        <TextBox>
+                            Suits
+                        </TextBox>
+                    </Viewbox>
+                    <ScrollViewer Grid.Row="1" Margin="0,0,0,0" HorizontalScrollBarVisibility="Hidden">
+                        <ListBox Name="SuitsListBox" SelectionChanged="SuitSelected">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Viewbox>
+                                            <TextBlock Text="{Binding Name}">
+                                            </TextBlock>
+                                        </Viewbox>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+                    <Button Grid.Row="2" Margin="5,0" Click="AddNewSuitClicked">
+                        <Viewbox>
+                            <TextBox>
+                                Add new suit
+                            </TextBox>
+                        </Viewbox>
+                    </Button>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="3*"/>
+                        </Grid.RowDefinitions>
+                        <Viewbox Grid.Row="0">
+                            <TextBox>
+                                Suit Name
+                            </TextBox>
+                        </Viewbox>
+                        <TextBox Name="SuitNameTextBox" LostFocus="SuitNameTextBoxLostFocus" Grid.Row="1">
+                        </TextBox>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="3*"/>
+                        </Grid.RowDefinitions>
+                        <Viewbox Grid.Row="0">
+                            <TextBox>
+                                Suit Value
+                            </TextBox>
+                        </Viewbox>
+                        <TextBox Name="SuitValueTextBox" LostFocus="SuitValueTextBoxLostFocus" Grid.Row="1">
+                        </TextBox>
+                    </Grid>
+                    <Grid Grid.Row="2" Margin="0,0.4,-0.2,0.2">
+                        <Button Click="SelectSuitImageButtonClicked" Margin="0,0,0,-1">
+                            <Viewbox Grid.Row="0">
+                                <TextBox>
+                                    <TextBox.Background>
+                                        <SolidColorBrush Opacity="0"/>
+                                    </TextBox.Background>
+                                    Select Suit Image
+                                </TextBox>
+                            </Viewbox>
+                        </Button>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Column="2">
+                    <Image Source="{Binding SuitImageSource, TargetNullValue={StaticResource DefaultCardImageSource}}">
+                    </Image>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Margin="10">
+                    <Viewbox>
+                        <TextBlock>
+                            Import Image
+                        </TextBlock>
+                    </Viewbox>
+                </Button>
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+</Page>

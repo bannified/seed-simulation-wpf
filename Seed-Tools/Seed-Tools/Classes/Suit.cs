@@ -14,6 +14,6 @@ namespace Seed_Tools
         public int Value { get; set; } = 0;
 
         // Main image associated with this suit
-        public string ImagePath { get; set; } 
+        public string ImagePath { get; set; } = "";
     }
 }
