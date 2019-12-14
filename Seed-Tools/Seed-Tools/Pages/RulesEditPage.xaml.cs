@@ -27,6 +27,13 @@ namespace Seed_Tools
             this.DataContext = this;
 
             SuitsListBox.ItemsSource = AllSuits;
+
+            RefreshSuitList();
+
+            if (AllSuits.Count > 0)
+            {
+                SuitsListBox.SelectedIndex = 0;
+            }
         }
 
         public Suit CurrentSuit
@@ -53,12 +60,24 @@ namespace Seed_Tools
 
         private void SuitSelected(object sender, SelectionChangedEventArgs e)
         {
+            if (SuitsListBox.SelectedItem == null)
+            {
+                return;
+            }
+
             CurrentSuit = (Suit)SuitsListBox.SelectedItem;
+
+            SuitNameTextBox.Text = CurrentSuit.Name;
+            SuitValueTextBox.Text = CurrentSuit.Value.ToString();
+            BitmapImage image = new BitmapImage(new Uri(CurrentSuit.ImagePath, UriKind.RelativeOrAbsolute));
+            SuitImageSource = image;
         }
 
         private void SuitNameTextBoxLostFocus(object sender, RoutedEventArgs e)
         {
             CurrentSuit.Name = SuitNameTextBox.Text;
+
+            RefreshSuitList();
         }
 
         private void SuitValueTextBoxLostFocus(object sender, RoutedEventArgs e)
@@ -102,11 +121,39 @@ namespace Seed_Tools
                     MessageBox.Show("File does not exist.");
                 }
             }
+
+            BitmapImage image = new BitmapImage(new Uri(CurrentSuit.ImagePath, UriKind.RelativeOrAbsolute));
+            if (image.DecodePixelHeight != 0 && image.DecodePixelWidth != 0)
+            {
+                SuitImageSource = image;
+            }
+            else
+            {
+                SuitImageSource = null;
+            }
         }
 
         private void AddNewSuitClicked(object sender, RoutedEventArgs e)
         {
+            App.CastedInstance.SuitsCollection.Add(new Suit());
+            RefreshSuitList();
+        }
 
+        private void RefreshSuitList()
+        {
+            AllSuits.Clear();
+
+            Suit lastSelected = CurrentSuit;
+
+            foreach (Suit suit in App.CastedInstance.SuitsCollection)
+            {
+                AllSuits.Add(suit);
+            }
+
+            if (AllSuits.Contains(lastSelected))
+            {
+                SuitsListBox.SelectedItem = lastSelected;
+            }
         }
     }
 }

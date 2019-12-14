@@ -118,7 +118,7 @@
                 </Grid>
 
                 <Grid Grid.Column="2">
-                    <Image Source="{Binding SuitImageSource, TargetNullValue={StaticResource DefaultCardImageSource}}">
+                    <Image Source="{Binding SuitImageSource, FallbackValue={StaticResource DefaultCardImageSource}, TargetNullValue={StaticResource DefaultCardImageSource}}">
                     </Image>
                 </Grid>
             </Grid>
