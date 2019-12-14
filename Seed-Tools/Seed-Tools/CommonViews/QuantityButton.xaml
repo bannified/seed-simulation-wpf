@@ -10,15 +10,14 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="10"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Button Name="MainButton" Grid.Row="0" Click="MainButtonClicked" Style="{StaticResource HomeButtonStyle}" FontSize="15" Padding="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0">
-            <Label Style="{StaticResource labelStyle}">
+        <Button Name="MainButton" Grid.Row="0" Click="MainButtonClicked" Padding="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0">
+            <Viewbox>
                 <TextBlock Text="{Binding ButtonText}" VerticalAlignment="Center" HorizontalAlignment="Center">
                 </TextBlock>
-            </Label>
+            </Viewbox>
         </Button>
 
         <TextBox Name="InputQuantityBox" Grid.Row="2" TextAlignment="Center" PreviewTextInput="QuantityInputCheck" TextChanged="OnTextChanged">

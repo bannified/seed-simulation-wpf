@@ -16,7 +16,7 @@ namespace Seed_Tools
         public string MainImageSourcePath { get; set; }
 
         // Gameplay variables
-        public Suit Suit1 { get; set; } = new Suit();
+        public string Suit1 { get; set; } = "";
         public int StrengthValue { get; set; } = 0;
 
         public CardData()

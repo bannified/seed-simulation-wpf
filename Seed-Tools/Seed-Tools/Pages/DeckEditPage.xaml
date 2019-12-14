@@ -160,6 +160,51 @@
                             </TextBlock>
                         </Viewbox>
                     </Button>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Suit Group -->
+                        <Grid Grid.Column="0" Margin="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="0.1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Viewbox Grid.Row="0">
+                                <TextBlock>
+                                    Suit
+                                </TextBlock>
+                            </Viewbox>
+                            <ComboBox Name="SuitComboBox" Grid.Row="2" SelectionChanged="SuitComboBoxSelectionChanged" 
+                                      IsEditable="True" 
+                                      IsTextSearchEnabled="True" IsTabStop="True"
+                                      SelectedValue="{Binding CurrentCard.Suit1}">
+                            </ComboBox>
+                        </Grid>
+
+                        <!-- Strength Group -->
+                        <Grid Grid.Column="1" Margin="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="0.1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Viewbox Grid.Row="0">
+                                <TextBlock>
+                                    Strength Value
+                                </TextBlock>
+                            </Viewbox>
+                            <TextBox Name="StrengthValueTextBox" Grid.Row="2" 
+                                     Text="{Binding CurrentCard.StrengthValue}"
+                                     IsTabStop="True"
+                                     LostFocus="StrengthValueTextBox_LostFocus">
+                            </TextBox>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>

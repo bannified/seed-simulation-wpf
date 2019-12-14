@@ -49,6 +49,11 @@ namespace Seed_Tools
 
         public ObservableCollection<DeckEntryData> DeckCardViews { get; set; }
 
+        /*
+         * For Suits
+         */
+         public ObservableCollection<string> Suits { get; set; }
+
         /**
          * Events
          */
@@ -58,6 +63,8 @@ namespace Seed_Tools
         public DeckEditPage()
         {
             InitializeComponent();
+            this.DataContext = this;
+
             ActiveDeckData = new DeckData();
 
             // Setup Library's Cards List
@@ -75,7 +82,7 @@ namespace Seed_Tools
             DeckCardViews = new ObservableCollection<DeckEntryData>();
             DeckCardsListBox.ItemsSource = DeckCardViews;
             OnDeckLoaded += RefreshDeckDisplay;
-            OnCardLibraryUpdated += RefreshDeckDisplay;
+            OnCardLibraryUpdated += RefreshCardLibrary;
 
             if (System.IO.File.Exists(Seed_Tools.Properties.Settings.Default.ActiveDeckPath))
             {
@@ -84,6 +91,15 @@ namespace Seed_Tools
 
             // Setup Main Card view
             SizeChanged += ResizeCardView;
+
+            // Load all the suits
+            Suits = new ObservableCollection<string>();
+
+            SuitComboBox.ItemsSource = Suits;
+            foreach (var kv in App.CastedInstance.SuitsCollection)
+            {
+                Suits.Add(kv.Key);
+            }
         }
 
         /// <summary>
@@ -218,7 +234,7 @@ namespace Seed_Tools
 
                 System.IO.FileStream fs = System.IO.File.Create(filename);
                 fs.Close();
-                string resultJson = JsonConvert.SerializeObject(ActiveDeckData);
+                string resultJson = JsonConvert.SerializeObject(ActiveDeckData, Formatting.Indented);
                 System.IO.File.WriteAllText(filename, resultJson);
             }
         }
@@ -356,7 +372,6 @@ namespace Seed_Tools
             {
                 CardViews.Add(kv.Value);
             }
-            OnCardLibraryUpdated?.Invoke();
         }
 
         /// <summary>
@@ -408,6 +423,37 @@ namespace Seed_Tools
             DeckCardsListBox.SelectedItem = null;
 
             AllCardsListBox.SelectedItem = CurrentCard;
+        }
+
+        private void SuitComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string selected = SuitComboBox.SelectedValue as string;
+            if (selected != null && App.CastedInstance.SuitsCollection.ContainsKey(selected))
+            {
+                CurrentCard.Suit1 = selected;
+            } else
+            {
+                CurrentCard.Suit1 = "";
+                SuitComboBox.SelectedValue = "";
+            }
+        }
+
+        private void StrengthValueTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (CurrentCard == null)
+            {
+                return;
+            }
+
+            int res = 0;
+            if (int.TryParse(StrengthValueTextBox.Text, out res))
+            {
+                CurrentCard.StrengthValue = res;
+            } else
+            {
+                CurrentCard.StrengthValue = 0;
+                StrengthValueTextBox.Text = 0.ToString();
+            }
         }
     }
 }
