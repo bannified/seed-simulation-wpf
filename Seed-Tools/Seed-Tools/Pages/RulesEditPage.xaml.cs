@@ -75,7 +75,12 @@ namespace Seed_Tools
 
         private void SuitNameTextBoxLostFocus(object sender, RoutedEventArgs e)
         {
+            string beforeName = CurrentSuit.Name;
             CurrentSuit.Name = SuitNameTextBox.Text;
+
+            // Re-add the suit with new name
+            App.CastedInstance.SuitsCollection.Remove(beforeName);
+            App.CastedInstance.SuitsCollection.Add(CurrentSuit.Name, CurrentSuit);
 
             RefreshSuitList();
         }
@@ -128,7 +133,15 @@ namespace Seed_Tools
 
         private void AddNewSuitClicked(object sender, RoutedEventArgs e)
         {
-            App.CastedInstance.SuitsCollection.Add(new Suit());
+            string defaultSuitName = "Suit";
+            string resultSuitName = defaultSuitName;
+            int repeatCount = 0;
+            while (App.CastedInstance.SuitsCollection.ContainsKey(resultSuitName))
+            {
+                resultSuitName = defaultSuitName + "_" + repeatCount;
+                repeatCount++;
+            }
+            App.CastedInstance.SuitsCollection.Add(resultSuitName, new Suit(resultSuitName));
             RefreshSuitList();
         }
 
@@ -138,9 +151,9 @@ namespace Seed_Tools
 
             Suit lastSelected = CurrentSuit;
 
-            foreach (Suit suit in App.CastedInstance.SuitsCollection)
+            foreach (var kv in App.CastedInstance.SuitsCollection)
             {
-                AllSuits.Add(suit);
+                AllSuits.Add(kv.Value);
             }
 
             if (AllSuits.Contains(lastSelected))

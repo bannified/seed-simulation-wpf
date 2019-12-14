@@ -10,6 +10,6 @@ namespace Seed_Tools
     {
         public Dictionary<string, CardData> AllCards { get; set; } = new Dictionary<string, CardData>();
 
-        public List<Suit> Suits { get; set; } = new List<Suit>();
+        public Dictionary<string, Suit> Suits { get; set; } = new Dictionary<string, Suit>();
     }
 }

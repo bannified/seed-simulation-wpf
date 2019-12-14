@@ -8,6 +8,13 @@ namespace Seed_Tools
 {
     public class Suit
     {
+        public Suit() { }
+
+        public Suit(string name)
+        {
+            this.Name = name;
+        }
+
         public string Name { get; set; } = "New Suit";
 
         // Value used to comparing suits (set all to 0 if they're all equal)

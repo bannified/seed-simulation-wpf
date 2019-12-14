@@ -22,7 +22,7 @@ namespace Seed_Tools
 
         public static App CastedInstance { get { return Current as App; } }
 
-        public List<Suit> SuitsCollection { get; set; }
+        public Dictionary<string, Suit> SuitsCollection { get; set; }
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -90,6 +90,7 @@ namespace Seed_Tools
             if (!System.IO.File.Exists(Seed_Tools.Properties.Settings.Default.CardLibraryPath))
             {
                 CardLibrary = new Dictionary<string, CardData>();
+                SuitsCollection = new Dictionary<string, Suit>();
             } else
             {
                 SeedData data = JsonConvert.DeserializeObject< SeedData >(System.IO.File.ReadAllText(path));

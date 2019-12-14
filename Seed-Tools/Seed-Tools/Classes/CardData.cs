@@ -15,6 +15,10 @@ namespace Seed_Tools
         public string Name { get; set; }
         public string MainImageSourcePath { get; set; }
 
+        // Gameplay variables
+        public Suit Suit1 { get; set; } = new Suit();
+        public int StrengthValue { get; set; } = 0;
+
         public CardData()
         {
             id = "-1";
