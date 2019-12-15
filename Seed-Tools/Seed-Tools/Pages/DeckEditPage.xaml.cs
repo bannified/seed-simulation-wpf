@@ -436,6 +436,21 @@ namespace Seed_Tools
                 CurrentCard.Suit1 = "";
                 SuitComboBox.SelectedValue = "";
             }
+
+            Suit resSuit = null;
+
+            App.CastedInstance.SuitsCollection.TryGetValue(CurrentCard.Suit1, out resSuit);
+
+            if (resSuit == null) return; // Suit does not exist
+
+            if (System.IO.File.Exists(resSuit.ImagePath))
+            {
+                card.SuitImageSource = new BitmapImage(new Uri(System.IO.Path.GetFullPath(resSuit.ImagePath), UriKind.RelativeOrAbsolute));
+            }
+            else
+            {
+                card.SuitImageSource = null;
+            }
         }
 
         private void StrengthValueTextBox_LostFocus(object sender, RoutedEventArgs e)

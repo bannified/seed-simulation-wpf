@@ -40,15 +40,25 @@ namespace Seed_Tools
             set { SetValue(MainImageSourceProperty, value); }
         }
 
+        public ImageSource SuitImageSource
+        {
+            get { return (ImageSource)GetValue(SuitImageSourceProperty); }
+            set { SetValue(SuitImageSourceProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for SuitImageSource.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SuitImageSourceProperty =
+            DependencyProperty.Register("SuitImageSource", typeof(ImageSource), typeof(Card), new PropertyMetadata(null));
+
         public Card()
         {
             InitializeComponent();
+            this.DataContext = this;
             cardData = new CardData();
         }
 
-        public Card(CardData data)
+        public Card(CardData data) : this()
         {
-            InitializeComponent();
             cardData = data;
         }
 
@@ -63,6 +73,20 @@ namespace Seed_Tools
                 } else
                 {
                     card.MainImageSource = null;
+                }
+
+                Suit resSuit = null;
+
+                App.CastedInstance.SuitsCollection.TryGetValue(card.cardData.Suit1, out resSuit);
+
+                if (resSuit == null) return; // Suit does not exist
+
+                if (System.IO.File.Exists(resSuit.ImagePath))
+                {
+                    card.SuitImageSource = new BitmapImage(new Uri(System.IO.Path.GetFullPath(resSuit.ImagePath), UriKind.RelativeOrAbsolute));
+                } else
+                {
+                    card.SuitImageSource = null;
                 }
             }
         }
