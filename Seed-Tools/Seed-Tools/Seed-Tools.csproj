@@ -90,6 +90,9 @@
     <Compile Include="Pages\RulesEditPage.xaml.cs">
       <DependentUpon>RulesEditPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SimulationPage.xaml.cs">
+      <DependentUpon>SimulationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SpecializedViews\Card.xaml.cs">
       <DependentUpon>Card.xaml</DependentUpon>
     </Compile>
@@ -117,6 +120,10 @@
       <DependentUpon>TextInputWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Pages\RulesEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SimulationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

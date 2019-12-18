@@ -15,7 +15,7 @@ namespace Seed_Tools
             CardIdToCount = new Dictionary<string, int>();
         }
 
-        public DeckData(string displayName) : base()
+        public DeckData(string displayName) : this()
         {
             DisplayName = displayName;
         }

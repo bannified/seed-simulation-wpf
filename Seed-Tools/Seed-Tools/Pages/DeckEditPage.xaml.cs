@@ -71,7 +71,6 @@ namespace Seed_Tools
             CardViews = new ObservableCollection<CardData>();
             AllCardsListBox.ItemsSource = CardViews;
             RefreshCardLibrary();
-            OnCardLibraryUpdated += RefreshDeckDisplay;
 
             if (CardViews.Count > 0)
             {
@@ -81,6 +80,8 @@ namespace Seed_Tools
             // Setup Deck's view
             DeckCardViews = new ObservableCollection<DeckEntryData>();
             DeckCardsListBox.ItemsSource = DeckCardViews;
+
+            OnCardLibraryUpdated += RefreshDeckDisplay;
             OnDeckLoaded += RefreshDeckDisplay;
             OnCardLibraryUpdated += RefreshCardLibrary;
 

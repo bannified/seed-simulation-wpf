@@ -27,7 +27,8 @@ namespace Seed_Tools
 
         private void Simulation_Click(object sender, RoutedEventArgs e)
         {
-
+            SimulationPage simulationPage = new SimulationPage();
+            this.NavigationService.Navigate(simulationPage);
         }
 
         private void DeckButton_Click(object sender, RoutedEventArgs e)
