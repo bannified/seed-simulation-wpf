@@ -52,9 +52,15 @@ namespace Seed_Tools
 
         public Card()
         {
+            // to prevent error in design mode.
+            if (System.ComponentModel.DesignerProperties.GetIsInDesignMode(this))
+            {
+                return;
+            }
+
             InitializeComponent();
-            this.DataContext = this;
             cardData = new CardData();
+            this.DataContext = this;
         }
 
         public Card(CardData data) : this()
@@ -64,29 +70,29 @@ namespace Seed_Tools
 
         private static void OnDataUpdated(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            Card card = d as Card;
-            if (card != null && card.cardData != null)
+            Card cardView = d as Card;
+            if (cardView != null && cardView.cardData != null)
             {
-                if (System.IO.File.Exists(card.cardData.MainImageSourcePath))
+                if (System.IO.File.Exists(cardView.cardData.MainImageSourcePath))
                 {
-                    card.MainImageSource = new BitmapImage(new Uri(System.IO.Path.GetFullPath(card.cardData.MainImageSourcePath), UriKind.RelativeOrAbsolute));
+                    cardView.MainImageSource = new BitmapImage(new Uri(System.IO.Path.GetFullPath(cardView.cardData.MainImageSourcePath), UriKind.RelativeOrAbsolute));
                 } else
                 {
-                    card.MainImageSource = null;
+                    cardView.MainImageSource = null;
                 }
 
                 Suit resSuit = null;
 
-                App.CastedInstance.SuitsCollection.TryGetValue(card.cardData.Suit1, out resSuit);
+                App.CastedInstance.SuitsCollection.TryGetValue(cardView.cardData.Suit1, out resSuit);
 
                 if (resSuit == null) return; // Suit does not exist
 
                 if (System.IO.File.Exists(resSuit.ImagePath))
                 {
-                    card.SuitImageSource = new BitmapImage(new Uri(System.IO.Path.GetFullPath(resSuit.ImagePath), UriKind.RelativeOrAbsolute));
+                    cardView.SuitImageSource = new BitmapImage(new Uri(System.IO.Path.GetFullPath(resSuit.ImagePath), UriKind.RelativeOrAbsolute));
                 } else
                 {
-                    card.SuitImageSource = null;
+                    cardView.SuitImageSource = null;
                 }
             }
         }

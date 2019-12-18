@@ -116,13 +116,13 @@ namespace Seed_Tools
 
                 if (resultHeight > page.CardSizingGrid.ActualHeight) // need to shrink height, take width to be fixed
                 {
-                    page.card.Width = resultWidth;
-                    page.card.Height = page.CardSizingGrid.ActualHeight;
+                    page.CardView.Width = resultWidth;
+                    page.CardView.Height = page.CardSizingGrid.ActualHeight;
                 }
                 else
                 {
-                    page.card.Height = resultHeight;
-                    page.card.Width = page.CardSizingGrid.ActualWidth;
+                    page.CardView.Height = resultHeight;
+                    page.CardView.Width = page.CardSizingGrid.ActualWidth;
                 }
 
             }
@@ -446,11 +446,11 @@ namespace Seed_Tools
 
             if (System.IO.File.Exists(resSuit.ImagePath))
             {
-                card.SuitImageSource = new BitmapImage(new Uri(System.IO.Path.GetFullPath(resSuit.ImagePath), UriKind.RelativeOrAbsolute));
+                CardView.SuitImageSource = new BitmapImage(new Uri(System.IO.Path.GetFullPath(resSuit.ImagePath), UriKind.RelativeOrAbsolute));
             }
             else
             {
-                card.SuitImageSource = null;
+                CardView.SuitImageSource = null;
             }
         }
 
@@ -470,6 +470,13 @@ namespace Seed_Tools
                 CurrentCard.StrengthValue = 0;
                 StrengthValueTextBox.Text = 0.ToString();
             }
+        }
+
+        private void RemoveCardFromLibraryClicked(object sender, RoutedEventArgs e)
+        {
+            App.CastedInstance.CardLibrary.Remove(CurrentCard.id);
+
+            OnCardLibraryUpdated?.Invoke();
         }
     }
 }
