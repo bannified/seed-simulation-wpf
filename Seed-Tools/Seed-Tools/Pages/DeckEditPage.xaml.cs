@@ -356,7 +356,7 @@ namespace Seed_Tools
             {
                 randomId = App.CastedInstance.random.Next().ToString(); // regenerate id
             }
-            App.CastedInstance.CardLibrary.Add(randomId, new CardData());
+            App.CastedInstance.CardLibrary.Add(randomId, new CardData(randomId));
 
             CurrentCard = App.CastedInstance.CardLibrary[randomId];
             OnCardLibraryUpdated?.Invoke();
@@ -428,6 +428,8 @@ namespace Seed_Tools
 
         private void SuitComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (CurrentCard == null) return;
+
             string selected = SuitComboBox.SelectedValue as string;
             if (selected != null && App.CastedInstance.SuitsCollection.ContainsKey(selected))
             {
