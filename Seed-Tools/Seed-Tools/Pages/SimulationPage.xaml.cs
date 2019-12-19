@@ -29,6 +29,16 @@ namespace Seed_Tools
 
         public System.Action OnDeckLoaded;
 
+        public int NumOfSimulationRuns
+        {
+            get { return (int)GetValue(NumOfSimulationRunsProperty); }
+            set { SetValue(NumOfSimulationRunsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for NumOfSimulationRuns.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NumOfSimulationRunsProperty =
+            DependencyProperty.Register("NumOfSimulationRuns", typeof(int), typeof(SimulationPage), new PropertyMetadata(1));
+
         public SimulationPage()
         {
             InitializeComponent();
@@ -96,6 +106,26 @@ namespace Seed_Tools
                     string relative = App.GetRelativePathFromFullPath(filename);
                     Seed_Tools.Properties.Settings.Default.ActiveDeckPath = relative;
                 }
+            }
+        }
+
+        private void StartSimulation(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void IntegerInputCheck(object sender, TextCompositionEventArgs e)
+        {
+            int res = 0;
+            e.Handled = !(int.TryParse(e.Text, out res));
+        }
+
+        private void OnNumberOfRunsTextChanged(object sender, TextChangedEventArgs e)
+        {
+            int res = 0;
+            if (int.TryParse(NumberOfRunsTextBox.Text, out res))
+            {
+                NumOfSimulationRuns = res;
             }
         }
     }

@@ -92,5 +92,45 @@
                 </ScrollViewer>
             </Grid>
         </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Viewbox Grid.Row="0">
+                    <TextBlock TextWrapping="Wrap">
+                        Number of runs
+                    </TextBlock>
+                </Viewbox>
+
+                <TextBox Grid.Row="1" Name="NumberOfRunsTextBox" TextAlignment="Center" Text="{Binding NumOfSimulationRuns}" PreviewTextInput="IntegerInputCheck" TextChanged="OnNumberOfRunsTextChanged">
+                </TextBox>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Button Margin="5" Click="StartSimulation">
+                    <Button.Background>
+                        <SolidColorBrush Color="HotPink"/>
+                    </Button.Background>
+                    <Viewbox>
+                        <TextBlock>
+                            Start Simulation
+                        </TextBlock>
+                    </Viewbox>
+                </Button>
+            </Grid>
+        </Grid>
     </Grid>
 </Page>
