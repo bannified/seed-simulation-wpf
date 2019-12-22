@@ -46,5 +46,17 @@ namespace Seed_Tools.Properties {
                 this["ActiveDeckPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int NumberOfPlayers {
+            get {
+                return ((int)(this["NumberOfPlayers"]));
+            }
+            set {
+                this["NumberOfPlayers"] = value;
+            }
+        }
     }
 }

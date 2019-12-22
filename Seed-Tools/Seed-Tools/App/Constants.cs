@@ -14,6 +14,11 @@ namespace Seed_Tools
         /// </summary>
         public partial class Constants
         {
+            public partial class SimulationParameters
+            {
+                public static readonly int MINIMUM_NUM_OF_PLAYERS = 2;
+            }
+
             public partial class FileExtensions
             {
                 public static readonly string DECK = ".dek";

@@ -39,6 +39,16 @@ namespace Seed_Tools
         public static readonly DependencyProperty NumOfSimulationRunsProperty =
             DependencyProperty.Register("NumOfSimulationRuns", typeof(int), typeof(SimulationPage), new PropertyMetadata(1));
 
+        public int NumOfPlayers
+        {
+            get { return (int)GetValue(NumOfPlayersProperty); }
+            set { SetValue(NumOfPlayersProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for NumOfPlayers.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NumOfPlayersProperty =
+            DependencyProperty.Register("NumOfPlayers", typeof(int), typeof(SimulationPage), new PropertyMetadata(Seed_Tools.Properties.Settings.Default.NumberOfPlayers));
+
         public SimulationPage()
         {
             InitializeComponent();
@@ -54,6 +64,8 @@ namespace Seed_Tools
             {
                 LoadDeckAtPath(Seed_Tools.Properties.Settings.Default.ActiveDeckPath);
             }
+
+            NumOfPlayers = Seed_Tools.Properties.Settings.Default.NumberOfPlayers;
         }
 
         /// <summary>
@@ -120,13 +132,25 @@ namespace Seed_Tools
             e.Handled = !(int.TryParse(e.Text, out res));
         }
 
-        private void OnNumberOfRunsTextChanged(object sender, TextChangedEventArgs e)
+        private void OnNumberOfRunsTextChanged(object sender, RoutedEventArgs e)
         {
+            TextBox textBox = sender as TextBox;
+            if (sender == null) return;
+
             int res = 0;
-            if (int.TryParse(NumberOfRunsTextBox.Text, out res))
-            {
-                NumOfSimulationRuns = res;
-            }
+            int.TryParse(textBox.Text, out res);
+            NumOfSimulationRuns = Math.Max(1, res);
+        }
+
+        private void OnNumberOfPlayersTextChanged(object sender, RoutedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (sender == null) return;
+
+            int res = 0;
+            int.TryParse(textBox.Text, out res);
+            NumOfPlayers = Math.Max(App.Constants.SimulationParameters.MINIMUM_NUM_OF_PLAYERS, res);
+            Seed_Tools.Properties.Settings.Default.NumberOfPlayers = NumOfPlayers;
         }
     }
 }

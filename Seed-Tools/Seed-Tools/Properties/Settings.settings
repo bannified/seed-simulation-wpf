@@ -8,5 +8,8 @@
     <Setting Name="ActiveDeckPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">./default.dek</Value>
     </Setting>
+    <Setting Name="NumberOfPlayers" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
