@@ -30,5 +30,29 @@ namespace Seed_Tools
             string resultJson = JsonConvert.SerializeObject(new DeckData(defaultName), Formatting.Indented);
             System.IO.File.WriteAllText(path, resultJson);
         }
+
+        public List<CompleteCardData> GetFullCompleteCardDataList()
+        {
+            List<CompleteCardData> resultList = new List<CompleteCardData>();
+
+            foreach (var kv in CardIdToCount)
+            {
+                int cardCount = kv.Value;
+                CardData simpleCard = null;
+                if (!App.CastedInstance.CardLibrary.TryGetValue(kv.Key, out simpleCard))
+                {
+                    continue;
+                }
+
+                CompleteCardData completeCard = new CompleteCardData(simpleCard);
+
+                for (int i = 0; i < cardCount; i++)
+                {
+                    resultList.Add(completeCard);
+                }
+            }
+
+            return resultList;
+        }
     }
 }
