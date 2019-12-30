@@ -29,5 +29,11 @@ namespace Seed_Tools
 
             this.StrengthValue = simpleCard.StrengthValue;
         }
+
+        public CompleteCardData(Suit suit, int strength)
+        {
+            this.Suit1 = suit;
+            this.StrengthValue = strength;
+        }
     }
 }

@@ -89,6 +89,7 @@
     <Compile Include="Classes\SeedData.cs" />
     <Compile Include="Classes\CompleteDeckData.cs" />
     <Compile Include="Classes\CompleteCardData.cs" />
+    <Compile Include="Classes\GameRulesBase.cs" />
     <Compile Include="Pages\RulesEditPage.xaml.cs">
       <DependentUpon>RulesEditPage.xaml</DependentUpon>
     </Compile>
