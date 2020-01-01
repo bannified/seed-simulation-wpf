@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Seed_Tools
 {
-    public class GameRulesBase
+    public class PokerGameRules
     {
         public enum Pattern
         {
@@ -22,6 +22,29 @@ namespace Seed_Tools
             RoyalFlush = 9
         }
 
+        public class Result : IComparable<Result>
+        {
+            public Pattern pattern;
+            public int strengthValue;
+
+            public Result(Pattern pattern, int strengthValue)
+            {
+                this.pattern = pattern;
+                this.strengthValue = strengthValue;
+            }
+
+            public int CompareTo(Result other)
+            {
+                int patternDiff = (int)pattern - (int)other.pattern;
+                if (patternDiff != 0)
+                {
+                    return patternDiff;
+                }
+
+                return strengthValue - other.strengthValue;
+            }
+        }
+
         public int MaxNumCards = 5; // maximum number of cards taken into consideration
 
         // metadata
@@ -35,12 +58,12 @@ namespace Seed_Tools
 
         private List<CompleteCardData> m_CommonPool;
 
-        public GameRulesBase()
+        public PokerGameRules()
         {
 
         }
 
-        public GameRulesBase(CompleteDeckData deck)
+        public PokerGameRules(CompleteDeckData deck)
         {
             ProcessDeck(deck);
         }
@@ -118,15 +141,22 @@ namespace Seed_Tools
             this.m_CommonPool = commonPool;
         }
 
-        public Pattern AnalyzeHandWithCommons(List<CompleteCardData> hand)
+        public Result AnalyzeHandWithCommons(List<CompleteCardData> hand)
         {
+            int highCard = -1;
+
             bool pair1 = false;
+            int pair1Value = -1;
             bool pair2 = false;
+            int pair2Value = -1;
             bool trips = false;
+            int tripsValue = -1;
             bool quads = false;
+            int quadsValue = -1;
 
             bool flush = false;
             Suit flushSuit = null;
+            int flushValue = -1;
 
             bool straight = false;
             Suit straightSuit = null;
@@ -164,23 +194,31 @@ namespace Seed_Tools
             // matching patterns
             for (int i = 0; i < overallStrengthCount.Count; i++)
             {
+                if (overallStrengthCount[i] > 0)
+                {
+                    highCard = i + m_MinStrength;
+                }
                 switch (overallStrengthCount[i])
                 {
                     case 2:
                         if (pair1)
                         {
                             pair2 = true;
+                            pair2Value = i + m_MinStrength;
                         }
                         else
                         {
                             pair1 = true;
+                            pair1Value = i + m_MinStrength;
                         }
                         break;
                     case 3:
                         trips = true;
+                        tripsValue = i + m_MinStrength;
                         break;
                     case 4:
                         quads = true;
+                        quadsValue = i + m_MinStrength;
                         break;
                 }
             }
@@ -192,6 +230,15 @@ namespace Seed_Tools
                 {
                     flush = true;
                     flushSuit = kv.Key;
+
+                    // Finding highest value of the flush suit
+                    consolidated.ForEach(card =>
+                    {
+                        if (card.Suit1 == flushSuit && card.StrengthValue > flushValue)
+                        {
+                            flushValue = card.StrengthValue;
+                        }
+                    });
                     break;
                 }
             }
@@ -235,7 +282,7 @@ namespace Seed_Tools
                 {
                     straight = true;
                     straightSuit = startingSuit;
-                    straightValue = startingValue;
+                    straightValue = startingValue + 4;
                 }
             }
 
@@ -260,7 +307,7 @@ namespace Seed_Tools
                         // Special case: Aces (or highest card that needs to roll back)
                         // Check for Ace being used as the smallest card first.
                         // highest card being treated as lowest card.
-                        if (straightValue == m_MinStrength - 1) // is highest value
+                        if (consolidated.Last().StrengthValue == m_MaxStrength) // last card is highest value
                         {
                             currentVal = m_MinStrength - 1;
                             startingIndex = 0;
@@ -299,43 +346,43 @@ namespace Seed_Tools
 
             if (royalFlush)
             {
-                return Pattern.RoyalFlush;
+                return new Result(Pattern.RoyalFlush, 0);
             }
             else if (straightFlush)
             {
-                return Pattern.StraightFlush;
+                return new Result(Pattern.StraightFlush, straightValue);
             }
             else if (quads)
             {
-                return Pattern.FourOfAKind;
+                return new Result(Pattern.FourOfAKind, quadsValue);
             }
             else if (trips && pair1)
             {
-                return Pattern.FullHouse;
+                return new Result(Pattern.FullHouse, tripsValue);
             }
             else if (flush)
             {
-                return Pattern.Flush;
+                return new Result(Pattern.Flush, highCard);
             }
             else if (straight)
             {
-                return Pattern.Straight;
+                return new Result(Pattern.Straight, straightValue);
             }
             else if (trips)
             {
-                return Pattern.ThreeOfAKind;
+                return new Result(Pattern.ThreeOfAKind, tripsValue);
             }
             else if (pair2)
             {
-                return Pattern.TwoPair;
+                return new Result(Pattern.TwoPair, Math.Max(pair1Value, pair2Value));
             }
             else if (pair1)
             {
-                return Pattern.OnePair;
+                return new Result(Pattern.OnePair, pair1Value);
             }
             else
             {
-                return Pattern.None;
+                return new Result(Pattern.None, highCard);
             }
         }
 

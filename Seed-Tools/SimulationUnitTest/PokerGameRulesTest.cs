@@ -10,7 +10,9 @@ namespace SimulationUnitTest
     [TestClass]
     public class PokerGameRulesTest
     {
-        private GameRulesBase gameRulesInstance = new GameRulesBase(SimulationUnitTest.Constants.Poker.Decks.SampleDeck);
+        private PokerGameRules gameRulesInstance = new PokerGameRules(SimulationUnitTest.Constants.Poker.Decks.SampleDeck);
+
+        private const int minStrength = 2;
 
         // Standalone pattern tests. 
 
@@ -23,7 +25,9 @@ namespace SimulationUnitTest
 
             List<CompleteCardData> testHand = new List<CompleteCardData>() { Cards.EIGHT_CLUBS, Cards.THREE_DIAMONDS };
 
-            Assert.IsTrue(gameRulesInstance.AnalyzeHandWithCommons(testHand) == GameRulesBase.Pattern.None);
+            PokerGameRules.Result res = gameRulesInstance.AnalyzeHandWithCommons(testHand);
+            Assert.IsTrue(res.pattern == PokerGameRules.Pattern.None);
+            Assert.IsTrue(res.strengthValue == Cards.ACE_CLUBS.StrengthValue);
         }
 
         [TestMethod]
@@ -35,7 +39,10 @@ namespace SimulationUnitTest
 
             List<CompleteCardData> testHand = new List<CompleteCardData>() { Cards.ACE_CLUBS, Cards.THREE_DIAMONDS };
 
-            Assert.IsTrue(gameRulesInstance.AnalyzeHandWithCommons(testHand) == GameRulesBase.Pattern.OnePair);
+            PokerGameRules.Result res = gameRulesInstance.AnalyzeHandWithCommons(testHand);
+
+            Assert.IsTrue(res.pattern == PokerGameRules.Pattern.OnePair);
+            Assert.IsTrue(res.strengthValue == Cards.ACE_CLUBS.StrengthValue);
         }
 
         [TestMethod]
@@ -47,7 +54,10 @@ namespace SimulationUnitTest
 
             List<CompleteCardData> testHand = new List<CompleteCardData>() { Cards.ACE_DIAMONDS, Cards.TEN_SPADES };
 
-            Assert.IsTrue(gameRulesInstance.AnalyzeHandWithCommons(testHand) == GameRulesBase.Pattern.TwoPair);
+            PokerGameRules.Result res = gameRulesInstance.AnalyzeHandWithCommons(testHand);
+
+            Assert.IsTrue(res.pattern == PokerGameRules.Pattern.TwoPair);
+            Assert.IsTrue(res.strengthValue == Cards.ACE_CLUBS.StrengthValue);
         }
 
         [TestMethod]
@@ -59,7 +69,10 @@ namespace SimulationUnitTest
 
             List<CompleteCardData> testHand = new List<CompleteCardData>() { Cards.ACE_DIAMONDS, Cards.ACE_HEARTS };
 
-            Assert.IsTrue(gameRulesInstance.AnalyzeHandWithCommons(testHand) == GameRulesBase.Pattern.ThreeOfAKind);
+            PokerGameRules.Result res = gameRulesInstance.AnalyzeHandWithCommons(testHand);
+
+            Assert.IsTrue(res.pattern == PokerGameRules.Pattern.ThreeOfAKind);
+            Assert.IsTrue(res.strengthValue == Cards.ACE_CLUBS.StrengthValue);
         }
 
         [TestMethod]
@@ -71,9 +84,10 @@ namespace SimulationUnitTest
 
             List<CompleteCardData> testHand = new List<CompleteCardData>() { Cards.JACK_DIAMONDS, Cards.TWO_HEARTS };
 
-            GameRulesBase.Pattern result = gameRulesInstance.AnalyzeHandWithCommons(testHand);
+            PokerGameRules.Result res = gameRulesInstance.AnalyzeHandWithCommons(testHand);
 
-            Assert.IsTrue(result == GameRulesBase.Pattern.Straight);
+            Assert.IsTrue(res.pattern == PokerGameRules.Pattern.Straight);
+            Assert.IsTrue(res.strengthValue == Cards.KING_CLUBS.StrengthValue);
         }
 
         [TestMethod]
@@ -85,9 +99,10 @@ namespace SimulationUnitTest
 
             List<CompleteCardData> testHand = new List<CompleteCardData>() { Cards.JACK_CLUBS, Cards.KING_HEARTS };
 
-            GameRulesBase.Pattern result = gameRulesInstance.AnalyzeHandWithCommons(testHand);
+            PokerGameRules.Result res = gameRulesInstance.AnalyzeHandWithCommons(testHand);
 
-            Assert.IsTrue(result == GameRulesBase.Pattern.Straight);
+            Assert.IsTrue(res.pattern == PokerGameRules.Pattern.Straight);
+            Assert.IsTrue(res.strengthValue == Cards.ACE_CLUBS.StrengthValue);
         }
 
         [TestMethod]
@@ -99,7 +114,10 @@ namespace SimulationUnitTest
 
             List<CompleteCardData> testHand = new List<CompleteCardData>() { Cards.FIVE_CLUBS, Cards.TWO_CLUBS };
 
-            Assert.IsTrue(gameRulesInstance.AnalyzeHandWithCommons(testHand) == GameRulesBase.Pattern.Flush);
+            PokerGameRules.Result res = gameRulesInstance.AnalyzeHandWithCommons(testHand);
+
+            Assert.IsTrue(res.pattern == PokerGameRules.Pattern.Flush);
+            Assert.IsTrue(res.strengthValue == Cards.ACE_CLUBS.StrengthValue);
         }
 
         [TestMethod]
@@ -111,7 +129,10 @@ namespace SimulationUnitTest
 
             List<CompleteCardData> testHand = new List<CompleteCardData>() { Cards.ACE_DIAMONDS, Cards.ACE_HEARTS };
 
-            Assert.IsTrue(gameRulesInstance.AnalyzeHandWithCommons(testHand) == GameRulesBase.Pattern.FullHouse);
+            PokerGameRules.Result res = gameRulesInstance.AnalyzeHandWithCommons(testHand);
+
+            Assert.IsTrue(res.pattern == PokerGameRules.Pattern.FullHouse);
+            Assert.IsTrue(res.strengthValue == Cards.ACE_CLUBS.StrengthValue);
         }
 
         [TestMethod]
@@ -123,7 +144,10 @@ namespace SimulationUnitTest
 
             List<CompleteCardData> testHand = new List<CompleteCardData>() { Cards.ACE_DIAMONDS, Cards.ACE_HEARTS };
 
-            Assert.IsTrue(gameRulesInstance.AnalyzeHandWithCommons(testHand) == GameRulesBase.Pattern.FourOfAKind);
+            PokerGameRules.Result res = gameRulesInstance.AnalyzeHandWithCommons(testHand);
+
+            Assert.IsTrue(res.pattern == PokerGameRules.Pattern.FourOfAKind);
+            Assert.IsTrue(res.strengthValue == Cards.ACE_CLUBS.StrengthValue);
         }
 
         [TestMethod]
@@ -135,9 +159,10 @@ namespace SimulationUnitTest
 
             List<CompleteCardData> testHand = new List<CompleteCardData>() { Cards.JACK_CLUBS, Cards.ACE_HEARTS };
 
-            GameRulesBase.Pattern result = gameRulesInstance.AnalyzeHandWithCommons(testHand);
+            PokerGameRules.Result res = gameRulesInstance.AnalyzeHandWithCommons(testHand);
 
-            Assert.IsTrue(result == GameRulesBase.Pattern.StraightFlush);
+            Assert.IsTrue(res.pattern == PokerGameRules.Pattern.StraightFlush);
+            Assert.IsTrue(res.strengthValue == Cards.QUEEN_CLUBS.StrengthValue);
         }
 
         [TestMethod]
@@ -149,10 +174,26 @@ namespace SimulationUnitTest
 
             List<CompleteCardData> testHand = new List<CompleteCardData>() { Cards.JACK_CLUBS, Cards.FIVE_DIAMONDS };
 
-            GameRulesBase.Pattern result = gameRulesInstance.AnalyzeHandWithCommons(testHand);
+            PokerGameRules.Result res = gameRulesInstance.AnalyzeHandWithCommons(testHand);
 
-            Assert.IsTrue(result == GameRulesBase.Pattern.StraightFlush);
+            Assert.IsTrue(res.pattern == PokerGameRules.Pattern.StraightFlush);
+            Assert.IsTrue(res.strengthValue == Cards.FIVE_DIAMONDS.StrengthValue);
         }
+        [TestMethod]
+        public void StraightFlushHighOverStraightHigh_Test()
+        {
+            // Setup
+            List<CompleteCardData> testCommons = new List<CompleteCardData>() { Cards.TWO_DIAMONDS, Cards.EIGHT_CLUBS, Cards.QUEEN_CLUBS, Cards.TEN_CLUBS, Cards.NINE_CLUBS };
+            gameRulesInstance.AnalyzeCommons(testCommons);
+
+            List<CompleteCardData> testHand = new List<CompleteCardData>() { Cards.JACK_CLUBS, Cards.KING_HEARTS };
+
+            PokerGameRules.Result res = gameRulesInstance.AnalyzeHandWithCommons(testHand);
+
+            Assert.IsTrue(res.pattern == PokerGameRules.Pattern.StraightFlush);
+            Assert.IsTrue(res.strengthValue == Cards.QUEEN_CLUBS.StrengthValue);
+        }
+
 
         [TestMethod]
         public void RoyalFlushOnly_Test()
@@ -163,9 +204,9 @@ namespace SimulationUnitTest
 
             List<CompleteCardData> testHand = new List<CompleteCardData>() { Cards.JACK_CLUBS, Cards.KING_CLUBS };
 
-            GameRulesBase.Pattern result = gameRulesInstance.AnalyzeHandWithCommons(testHand);
+            PokerGameRules.Result res = gameRulesInstance.AnalyzeHandWithCommons(testHand);
 
-            Assert.IsTrue(result == GameRulesBase.Pattern.RoyalFlush);
+            Assert.IsTrue(res.pattern == PokerGameRules.Pattern.RoyalFlush);
         }
 
         // Precedence tests, where one pattern takes precedence over another (in terms of strength)
@@ -178,9 +219,10 @@ namespace SimulationUnitTest
 
             List<CompleteCardData> testHand = new List<CompleteCardData>() { Cards.JACK_CLUBS, Cards.KING_SPADES };
 
-            GameRulesBase.Pattern result = gameRulesInstance.AnalyzeHandWithCommons(testHand);
+            PokerGameRules.Result res = gameRulesInstance.AnalyzeHandWithCommons(testHand);
 
-            Assert.IsTrue(result == GameRulesBase.Pattern.Flush);
+            Assert.IsTrue(res.pattern == PokerGameRules.Pattern.Flush);
+            Assert.IsTrue(res.strengthValue == Cards.ACE_CLUBS.StrengthValue);
         }
 
         /// <summary>
@@ -196,7 +238,10 @@ namespace SimulationUnitTest
 
             List<CompleteCardData> testHand = new List<CompleteCardData>() { Cards.ACE_DIAMONDS, Cards.ACE_HEARTS, Cards.JACK_DIAMONDS };
 
-            Assert.IsTrue(gameRulesInstance.AnalyzeHandWithCommons(testHand) == GameRulesBase.Pattern.FullHouse);
+            PokerGameRules.Result res = gameRulesInstance.AnalyzeHandWithCommons(testHand);
+
+            Assert.IsTrue(res.pattern == PokerGameRules.Pattern.FullHouse);
+            Assert.IsTrue(res.strengthValue == Cards.ACE_CLUBS.StrengthValue);
         }
     }
 }
