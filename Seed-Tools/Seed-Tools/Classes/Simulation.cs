@@ -14,10 +14,11 @@ namespace Seed_Tools
         public int NumberOfSimulations { get; set; }
         public int NumberOfPlayers { get; set; }
         public CompleteDeckData Deck { get; set; }
+        public GameRulesBase CurrentGameRules { get; set; }
 
         // Simulation runtime variables
         private int m_CurrentSimNumber = 0;
-        private List<List<CompleteCardData>> m_PlayerCards; // Cards of every player
+        private List<PlayerGameData> m_PlayerCards; // Cards of every player
         private List<CompleteCardData> m_ShuffleDeck;
         private List<CompleteCardData> m_CommonCards { get; set; }
 
@@ -30,7 +31,8 @@ namespace Seed_Tools
 
             this.m_ShuffleDeck = deckData.GetFullCompleteCardDataList();
             m_CommonCards = new List<CompleteCardData>(NumberOfCommonCards);
-            m_PlayerCards = new List<List<CompleteCardData>>(NumberOfPlayers);
+            m_PlayerCards = new List<PlayerGameData>(NumberOfPlayers);
+            CurrentGameRules = new PokerGameRules(new CompleteDeckData(m_ShuffleDeck));
         }
 
         public void Run()
@@ -40,11 +42,12 @@ namespace Seed_Tools
             // Initialize Players
             for (int i = 0; i < NumberOfPlayers; i++)
             {
-                m_PlayerCards.Add(new List<CompleteCardData>(NumberOfCardsPerPlayer));
+                m_PlayerCards.Add(new PlayerGameData());
             }
 
             for (int i = 0; i < NumberOfSimulations; i++)
             {
+                ++m_CurrentSimNumber;
                 // Setup deck, shuffle deck.
                 m_ShuffleDeck.Shuffle();
                 Deck = new CompleteDeckData(m_ShuffleDeck);
@@ -52,9 +55,9 @@ namespace Seed_Tools
                 // Distribute cards to players
                 for (int turn = 0; turn < NumberOfCardsPerPlayer; turn++)
                 {
-                    foreach (List<CompleteCardData> hand in m_PlayerCards)
+                    foreach (PlayerGameData player in m_PlayerCards)
                     {
-                        hand.Add(Deck.Cards.Dequeue());
+                        player.AddCardToHand(Deck.Cards.Dequeue());
                     }
                 }
 
@@ -65,6 +68,10 @@ namespace Seed_Tools
                 }
 
                 // todo: Add checking of rules for every player, and determine the winner.
+                for (int player = 0; player < NumberOfPlayers; player++)
+                {
+
+                }
 
                 ClearSimulation();
             }
@@ -74,7 +81,7 @@ namespace Seed_Tools
         {
             foreach (var player in m_PlayerCards)
             {
-                player.Clear();
+                player.ClearHand();
             }
 
             m_CommonCards.Clear();

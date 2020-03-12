@@ -123,6 +123,7 @@ namespace Seed_Tools
 
         private void StartSimulation(object sender, RoutedEventArgs e)
         {
+            Simulation sim = new Simulation(ActiveDeckData, 2, 5, NumOfSimulationRuns, NumOfPlayers);
 
         }
 
